@@ -8,11 +8,10 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #FAB34E;
-  /* background-color: #c4bcef; */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+  height: 100vh;
 }
 
 /* Container */
@@ -21,26 +20,21 @@ body {
   padding: 30px;
   border: 2px solid #000;
   border-radius: 15px;
-  /* max-width: 320px; */
-  height: 90%;
-  /* background-color: #fafafa; */
+  width: 90%;
+  max-width: 350px;
   background-color: #c4bcef;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Títulos */
-/* h2 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
+/* Carrinho */
+#carrinho {
+  float: right;
+  width: 30px;
+  filter: brightness(0) saturate(100%) invert(0);
   margin-bottom: 10px;
-} */
-
-#carrinho{
-    float: right;
-    filter: brightness(0) saturate(100%) invert(0); 
 }
 
+/* Título */
 .title {
   font-size: 24px;
   font-weight: bold;
@@ -48,14 +42,8 @@ body {
   margin: 5px 0;
 }
 
-#sorvetertiaTitle{
-    width: 240px;
-}
-
-.subtitle {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 20px;
+#sorvetertiaTitle {
+  width: 240px;
 }
 
 /* Botões */
@@ -79,19 +67,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.button .icon {
-  width: 20px;
-  height: 20px;
-  margin-left: 8px;
-  margin-right: 10px;
-}
-
-/* Botão específico */
-/* .pedir {
-  background-color: #fff600;
-  border: 2px solid #000;
-} */
-
+/* Botões específicos */
 .açai {
   background-color: #9c007e;
   border: 2px solid #470040;
@@ -104,10 +80,24 @@ body {
   color: #fff;
 }
 
-/* .açai .icon {
-  filter: brightness(0) invert(1); 
+/* Responsividade: aplicar zoom em celulares */
+@media (max-width: 480px) {
+  .container {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
+
+  #sorvetertiaTitle {
+    width: 260px;
+  }
+
+  .button {
+    font-size: 1.1rem;
+    padding: 14px 20px;
+  }
+
+  #carrinho {
+    width: 34px;
+  }
 }
 
-.whatsapp .icon {
-  filter: brightness(0) invert(1); 
-} */
