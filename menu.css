@@ -11,11 +11,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 /* Container */
 .container {
+  margin-top: 2%;
   text-align: center;
   padding: 30px;
   border: 2px solid #000;
