@@ -83,23 +83,20 @@ body {
 /* Responsividade: aplicar zoom em celulares */
 @media (max-width: 480px) {
   .container {
-    max-width: 95%;
-    padding: 40px 20px;
-    border-width: 3px;
+    transform: scale(1.2);
+    transform-origin: center;
   }
 
   #sorvetertiaTitle {
-    width: 300px;
+    width: 260px;
   }
 
   .button {
-    font-size: 1.2rem;
-    padding: 16px 24px;
-    max-width: 100%;
+    font-size: 1.1rem;
+    padding: 14px 20px;
   }
 
   #carrinho {
-    width: 36px;
+    width: 34px;
   }
 }
-
