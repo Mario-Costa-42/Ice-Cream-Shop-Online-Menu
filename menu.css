@@ -11,12 +11,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 100vh; */
+  height: 100vh;
 }
 
 /* Container */
 .container {
-  margin-top: 2%;
   text-align: center;
   padding: 30px;
   border: 2px solid #000;
@@ -84,21 +83,23 @@ body {
 /* Responsividade: aplicar zoom em celulares */
 @media (max-width: 480px) {
   .container {
-    transform: scale(1.2);
-    transform-origin: center;
+    max-width: 95%;
+    padding: 40px 20px;
+    border-width: 3px;
   }
 
   #sorvetertiaTitle {
-    width: 260px;
+    width: 300px;
   }
 
   .button {
-    font-size: 1.1rem;
-    padding: 14px 20px;
+    font-size: 1.2rem;
+    padding: 16px 24px;
+    max-width: 100%;
   }
 
   #carrinho {
-    width: 34px;
+    width: 36px;
   }
 }
 
