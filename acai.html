@@ -3,9 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Açaí</title>
+    <title>MILKSHAKE</title>
+    <link rel="stylesheet" href="acai.css" />
 </head>
 <body>
-    este é o meni do do açaí
+    <h1 id="AcaiTitle">Açaí</h1>
+<h2 id="AcaiSubtitle">Escolha o tamanho</h2>
+
+<div class="opcoes">
+    <div class="Quantidademl" data-tamanho="300ml" data-preco="13.00">
+        300ml <span class="preco">R$13,00</span>
+    </div>
+    <div class="Quantidademl" data-tamanho="500ml" data-preco="16.00">
+        500ml <span class="preco">R$16,00</span>
+    </div>
+</div>
+
+<h3 id="AcaiInformation">1 cobertura e 3 acompanhamento grátis</h3>
+
+<h2 id="AcaiSubtitle">Coberturas</h2>
+
+<div id="saboresContainer">
+    <div class="sabor">Chocolate</div>
+    <div class="sabor">Morango</div>
+    <div class="sabor">Uva</div>
+    <div class="sabor">Menta</div>
+    <div class="sabor">Caramelo</div>
+    <div class="sabor">Tutti frutti</div>
+    <div class="sabor">Blue ice</div>
+    <div class="sabor">Leite condensado</div>
+    <div class="sabor">Frutas vermelhas</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <script>
+    const opcoes = document.querySelectorAll(".Quantidademl");
+
+    opcoes.forEach(opcao => {
+        opcao.addEventListener("click", () => {
+            // Remove a seleção anterior
+            opcoes.forEach(o => o.classList.remove("selecionado"));
+
+            // Marca a opção clicada
+            opcao.classList.add("selecionado");
+
+            // Obtém tamanho e preço
+            const tamanho = opcao.getAttribute("data-tamanho");
+            const preco = opcao.getAttribute("data-preco");
+
+            console.log(`Selecionado: ${tamanho} - R$${preco}`);
+        });
+    });
+
+    document.querySelectorAll(".sabor").forEach(item => {
+        item.addEventListener("click", () => {
+            item.classList.toggle("selecionado");
+        });
+    });
+</script>
+
 </body>
+
 </html>
