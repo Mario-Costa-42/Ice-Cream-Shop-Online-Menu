@@ -13,6 +13,13 @@ body {
   height: 100vh;
 }
 
+#home{
+  float: left;
+  width: 30px;
+  filter: brightness(0) saturate(100%) invert(0);
+  margin-bottom: 10px;
+}
+
 #MilkshakeTitle{
     text-align: center;
     font-size: 2.5em;

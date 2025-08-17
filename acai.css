@@ -54,7 +54,12 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 } */
 
-
+#home{
+  float: left;
+  width: 30px;
+  filter: brightness(0) saturate(100%) invert(0);
+  margin-bottom: 10px;
+}
     #AcaiTitle {
         text-align: center;
         font-size: 2.5em;
@@ -142,9 +147,11 @@ body {
 }
 
     .sabor {
-        display: inline-block;
+        display: block;
         font-size: 1.3em;
-        background-color: #fff600;
+        text-align: center;
+        width: 85%;
+        max-width: 500px;
         border: 2px solid #000;
         border-radius: 10px;
         padding: 12px 20px;
@@ -160,8 +167,28 @@ body {
     }
 
     .sabor.selecionado {
-        background-color: #ffbd00;
-        border-color: #ff8000;
+        background-color: #231942 !important;
+        color: #fff;
+        border-color: #c75b00;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
+        .preco {
+            color: #fff;
+        }
     }
 
 
+.btn-carrinho {
+    background-color: darkgreen;
+    color: white;
+    border: 2px solid #000;
+    border-radius: 20px;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 50px;
+    margin: 10px auto;
+    width: 85%;
+    max-width: 500px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
