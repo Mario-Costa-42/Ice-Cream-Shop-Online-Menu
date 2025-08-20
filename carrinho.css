@@ -1,0 +1,6 @@
+#home{
+  float: left;
+  width: 30px;
+  filter: brightness(0) saturate(100%) invert(0);
+  margin-bottom: 10px;
+}

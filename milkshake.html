@@ -8,7 +8,7 @@
 </head>
 <body>
   <a href="./menu.html">
-      <img src="./assets/arrow_back_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg" alt="Início" id="home" />
+      <img src="./assets/arrow_back.svg" alt="Início" id="home" />
     </a>
     <h1 id="MilkshakeTitle">Milkshake</h1>
     <h2 id="Quantidademl">300ml</h2>
@@ -98,38 +98,71 @@
 </div>
 
 <script>
-    function changeQuantity(button, amount) {
-    let span = button.parentElement.querySelector('span');
-    let value = parseInt(span.textContent) + amount;
-    if (value < 0) value = 0;
-    span.textContent = value;
-  }
+  //   function changeQuantity(button, amount) {
+  //   let span = button.parentElement.querySelector('span');
+  //   let value = parseInt(span.textContent) + amount;
+  //   if (value < 0) value = 0;
+  //   span.textContent = value;
+  // }
 
-  function adicionarCarrinho() {
-    let sabores = document.querySelectorAll('.checkbox-btn');
-    let pedido = [];
-    let totalGeral = 0;
+  // function adicionarCarrinho() {
+  //   let sabores = document.querySelectorAll('.checkbox-btn');
+  //   let pedido = [];
+  //   let totalGeral = 0;
 
-    sabores.forEach(sabor => {
-      let quantidade = parseInt(sabor.querySelector('.quantity-control span').textContent);
-      let nome = sabor.querySelector('.label-content span').textContent;
-      let precoTexto = sabor.querySelector('.price').textContent.replace("R$","").replace(",",".").trim();
-      let preco = parseFloat(precoTexto);
+  //   sabores.forEach(sabor => {
+  //     let quantidade = parseInt(sabor.querySelector('.quantity-control span').textContent);
+  //     let nome = sabor.querySelector('.label-content span').textContent;
+  //     let precoTexto = sabor.querySelector('.price').textContent.replace("R$","").replace(",",".").trim();
+  //     let preco = parseFloat(precoTexto);
 
-      if (quantidade > 0) {
-        let subtotal = quantidade * preco;
-        totalGeral += subtotal;
-        pedido.push(`${nome} x${quantidade} - R$ ${subtotal.toFixed(2).replace(".",",")}`);
-      }
-    });
+  //     if (quantidade > 0) {
+  //       let subtotal = quantidade * preco;
+  //       totalGeral += subtotal;
+  //       pedido.push(`${nome} x${quantidade} - R$ ${subtotal.toFixed(2).replace(".",",")}`);
+  //     }
+  //   });
 
-    if (pedido.length > 0) {
-      pedido.push(`\nTotal: R$ ${totalGeral.toFixed(2).replace(".",",")}`);
-      alert("Milkshake\n" + pedido.join("\n"));
-    } else {
-      alert("Selecione ao menos 1 item.");
+  //   if (pedido.length > 0) {
+  //     pedido.push(`\nTotal: R$ ${totalGeral.toFixed(2).replace(".",",")}`);
+  //     alert("Milkshake\n" + pedido.join("\n"));
+  //   } else {
+  //     alert("Selecione ao menos 1 item.");
+  //   }
+  // }
+
+   function changeQuantity(button, amount) {
+      let span = button.parentElement.querySelector('span');
+      let value = parseInt(span.textContent) + amount;
+      if (value < 0) value = 0;
+      span.textContent = value;
     }
-  }
+
+    function adicionarCarrinho() {
+      let sabores = document.querySelectorAll('.checkbox-btn');
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+      sabores.forEach(sabor => {
+        let quantidade = parseInt(sabor.querySelector('.quantity-control span').textContent);
+        let nome = sabor.querySelector('.label-content span').textContent;
+        let precoTexto = sabor.querySelector('.price').textContent.replace("R$","").replace(",",".").trim();
+        let preco = parseFloat(precoTexto);
+
+        if (quantidade > 0) {
+          let subtotal = quantidade * preco;
+          carrinho.push({
+            produto: "Milkshake",
+            nome: nome,
+            quantidade: quantidade,
+            preco: preco,
+            subtotal: subtotal
+          });
+        }
+      });
+
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      window.location.href = "carrinho.html";
+    }
 </script>
 </body>
 
