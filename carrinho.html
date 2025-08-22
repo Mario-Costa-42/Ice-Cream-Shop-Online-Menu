@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,6 +31,7 @@
           divItem.style.display = "flex";
           divItem.style.justifyContent = "space-between";
           divItem.style.alignItems = "center";
+          divItem.style.background = "#f9f9f9";
 
           let descricao = "";
 
@@ -84,5 +85,184 @@
   </script>
 
 
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrinho</title>
+  <link rel="stylesheet" href="carrinho.css" />
+  <style>
+    /* Botão WhatsApp */
+    #btnWhatsapp {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+    #btnWhatsapp img {
+      width: 20px;
+      height: 20px;
+    }
+    select, input {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <a href="./menu.html">
+    <img src="./assets/arrow_back.svg" alt="Início" id="home" />
+  </a>
+
+  <h1>🛒 Carrinho</h1>
+  <div id="carrinho"></div>
+
+  <!-- Seção de Pagamento -->
+  <h2>Forma de Pagamento</h2>
+  <select id="pagamento" onchange="mostrarOpcaoPagamento()">
+    <option value="">Selecione...</option>
+    <option value="pix">Pix</option>
+    <option value="dinheiro">Dinheiro</option>
+  </select>
+
+  <div id="pixInfo" style="display:none; margin-top:10px;">
+    <p>Escaneie o QR Code ou copie a chave Pix:</p>
+    <img src="qrcode.png" alt="QR Code Pix" width="150">
+    <br><br>
+    <button onclick="copiarPix()">📋 Copiar Chave Pix</button>
+  </div>
+
+  <div id="dinheiroInfo" style="display:none; margin-top:10px;">
+    <label>Vai precisar de troco?</label>
+    <input type="number" id="troco" placeholder="Troco para quanto?">
+  </div>
+
+  <br>
+  <button id="btnWhatsapp" onclick="enviarWhatsapp()">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    Enviar no WhatsApp
+  </button>
+
+  <script>
+    function carregarCarrinho() {
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      let container = document.getElementById("carrinho");
+      container.innerHTML = ""; 
+
+      if (carrinho.length > 0) {
+        let totalGeral = 0;
+        let listaPedidos = "";
+
+        carrinho.forEach((item, index) => {
+          let divItem = document.createElement("div");
+          divItem.style.border = "1px solid #ccc";
+          divItem.style.padding = "10px";
+          divItem.style.margin = "10px 0";
+          divItem.style.borderRadius = "8px";
+          divItem.style.background = "#f9f9f9";
+
+          let descricao = "";
+
+          if (item.produto === "Milkshake") {
+            descricao = `${item.produto} - ${item.nome} x${item.quantidade} = R$ ${item.subtotal.toFixed(2).replace(".", ",")}`;
+          } else if (item.produto === "Açaí") {
+            let extras = item.extras.map(e => `${e.nome} (+R$ ${e.preco.toFixed(2).replace(".", ",")})`).join(", ");
+            descricao = `${item.produto} ${item.tamanho} - Coberturas: ${item.coberturas.join(", ")} - Acompanhamentos: ${item.acompanhamentos.join(", ")} - Extras: ${extras || "Nenhum"} = R$ ${item.subtotal.toFixed(2).replace(".", ",")}`;
+          }
+
+          let span = document.createElement("span");
+          span.textContent = descricao;
+
+          let btnRemover = document.createElement("button");
+          btnRemover.textContent = "❌ Remover";
+          btnRemover.style.marginLeft = "10px";
+          btnRemover.style.background = "#ff4d4d";
+          btnRemover.style.color = "#fff";
+          btnRemover.style.border = "none";
+          btnRemover.style.padding = "5px 10px";
+          btnRemover.style.cursor = "pointer";
+          btnRemover.style.borderRadius = "6px";
+
+          btnRemover.onclick = () => {
+            removerItem(index);
+          };
+
+          divItem.appendChild(span);
+          divItem.appendChild(btnRemover);
+          container.appendChild(divItem);
+
+          totalGeral += item.subtotal;
+          listaPedidos += `- ${descricao}\n`;
+        });
+
+        let totalP = document.createElement("h2");
+        totalP.textContent = "Total: R$ " + totalGeral.toFixed(2).replace(".", ",");
+        container.appendChild(totalP);
+
+        localStorage.setItem("resumoPedido", listaPedidos + "\nTotal: R$ " + totalGeral.toFixed(2).replace(".", ","));
+      } else {
+        container.textContent = "Carrinho vazio.";
+      }
+    }
+
+    function removerItem(index) {
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      carrinho.splice(index, 1); 
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      carregarCarrinho();
+    }
+
+    function mostrarOpcaoPagamento() {
+      let opcao = document.getElementById("pagamento").value;
+      document.getElementById("pixInfo").style.display = (opcao === "pix") ? "block" : "none";
+      document.getElementById("dinheiroInfo").style.display = (opcao === "dinheiro") ? "block" : "none";
+    }
+
+    function copiarPix() {
+      let chavePix = "meuemail@pix.com"; // coloque sua chave aqui
+      navigator.clipboard.writeText(chavePix);
+      alert("Chave Pix copiada!");
+    }
+
+    function enviarWhatsapp() {
+      let resumo = localStorage.getItem("resumoPedido") || "";
+      let pagamento = document.getElementById("pagamento").value;
+      let textoPagamento = "";
+
+      if (pagamento === "pix") {
+        textoPagamento = "\nForma de pagamento: Pix ✅";
+      } else if (pagamento === "dinheiro") {
+        let troco = document.getElementById("troco").value;
+        textoPagamento = `\nForma de pagamento: Dinheiro ✅ ${troco ? "(Troco para R$" + troco + ")" : ""}`;
+      } else {
+        textoPagamento = "\nForma de pagamento: Não informado ⚠️";
+      }
+
+      let textoFinal = "📋 Pedido:\n" + resumo + textoPagamento;
+
+      // Substitua pelo número do WhatsApp no formato 55+DDD+NUMERO
+      let numero = "5532984976952"; 
+      let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(textoFinal);
+
+      window.location.href = url;
+    }
+
+    carregarCarrinho();
+  </script>
 </body>
 </html>
