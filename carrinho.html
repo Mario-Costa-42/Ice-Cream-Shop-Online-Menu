@@ -1,95 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="carrinho.css" />
-</head>
-<body>
-    <a href="./menu.html">
-      <img src="./assets/arrow_back.svg" alt="Início" id="home" />
-    </a>
-  <h1>🛒 Carrinho</h1>
-  <div id="carrinho"></div>
-
-  <script>
-    function carregarCarrinho() {
-      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-      let container = document.getElementById("carrinho");
-      container.innerHTML = ""; // limpa antes de renderizar de novo
-
-      if (carrinho.length > 0) {
-        let totalGeral = 0;
-
-        carrinho.forEach((item, index) => {
-          let divItem = document.createElement("div");
-          divItem.style.border = "1px solid #ccc";
-          divItem.style.padding = "10px";
-          divItem.style.margin = "10px 0";
-          divItem.style.borderRadius = "8px";
-          divItem.style.display = "flex";
-          divItem.style.justifyContent = "space-between";
-          divItem.style.alignItems = "center";
-          divItem.style.background = "#f9f9f9";
-
-          let descricao = "";
-
-          if (item.produto === "Milkshake") {
-            descricao = `${item.produto} - ${item.nome} x${item.quantidade} = R$ ${item.subtotal.toFixed(2).replace(".", ",")}`;
-          } else if (item.produto === "Açaí") {
-            let extras = item.extras.map(e => `${e.nome} (+R$ ${e.preco.toFixed(2).replace(".", ",")})`).join(", ");
-            descricao = `${item.produto} ${item.tamanho} - Coberturas: ${item.coberturas.join(", ")} - Acompanhamentos: ${item.acompanhamentos.join(", ")} - Extras: ${extras || "Nenhum"} = R$ ${item.subtotal.toFixed(2).replace(".", ",")}`;
-          }
-
-          let span = document.createElement("span");
-          span.textContent = descricao;
-
-          let btnRemover = document.createElement("button");
-          btnRemover.textContent = "❌ Remover";
-          btnRemover.style.marginLeft = "10px";
-          btnRemover.style.background = "#ff4d4d";
-          btnRemover.style.color = "#fff";
-          btnRemover.style.border = "none";
-          btnRemover.style.padding = "5px 10px";
-          btnRemover.style.cursor = "pointer";
-          btnRemover.style.borderRadius = "6px";
-
-          btnRemover.onclick = () => {
-            removerItem(index);
-          };
-
-          divItem.appendChild(span);
-          divItem.appendChild(btnRemover);
-          container.appendChild(divItem);
-
-          totalGeral += item.subtotal;
-        });
-
-        let totalP = document.createElement("h2");
-        totalP.textContent = "Total: R$ " + totalGeral.toFixed(2).replace(".", ",");
-        container.appendChild(totalP);
-      } else {
-        container.textContent = "Carrinho vazio.";
-      }
-    }
-
-    function removerItem(index) {
-      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-      carrinho.splice(index, 1); // remove o item da posição escolhida
-      localStorage.setItem("carrinho", JSON.stringify(carrinho));
-      carregarCarrinho(); // recarrega a lista
-    }
-
-    carregarCarrinho();
-  </script>
-
-
-</body>
-</html> -->
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -107,14 +15,18 @@
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
       gap: 8px;
       margin-top: 15px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+      line-height: 1;
+      vertical-align: middle;
     }
     #btnWhatsapp img {
       width: 20px;
       height: 20px;
+      vertical-align: middle;
     }
     select, input {
       padding: 8px;
@@ -142,14 +54,15 @@
 
   <div id="pixInfo" style="display:none; margin-top:10px;">
     <p>Escaneie o QR Code ou copie a chave Pix:</p>
-    <img src="qrcode.png" alt="QR Code Pix" width="150">
+    <img src="./assets/pixQRcode.jpg" id="qrcode" alt="QR Code Pix" width="150">
     <br><br>
-    <button onclick="copiarPix()">📋 Copiar Chave Pix</button>
+    <button id="textCopyPix" onclick="copiarPix()">📋 Copiar Chave Pix</button>
   </div>
 
   <div id="dinheiroInfo" style="display:none; margin-top:10px;">
     <label>Vai precisar de troco?</label>
-    <input type="number" id="troco" placeholder="Troco para quanto?">
+    <br>
+    <input style="text-align: center;" type="number" id="troco" placeholder="Troco para quanto?">
   </div>
 
   <br>
@@ -234,7 +147,7 @@
     }
 
     function copiarPix() {
-      let chavePix = "meuemail@pix.com"; // coloque sua chave aqui
+      let chavePix = "45.371.060/0001-59";
       navigator.clipboard.writeText(chavePix);
       alert("Chave Pix copiada!");
     }
@@ -255,7 +168,6 @@
 
       let textoFinal = "📋 Pedido:\n" + resumo + textoPagamento;
 
-      // Substitua pelo número do WhatsApp no formato 55+DDD+NUMERO
       let numero = "5532984976952"; 
       let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(textoFinal);
 

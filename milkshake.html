@@ -98,38 +98,6 @@
 </div>
 
 <script>
-  //   function changeQuantity(button, amount) {
-  //   let span = button.parentElement.querySelector('span');
-  //   let value = parseInt(span.textContent) + amount;
-  //   if (value < 0) value = 0;
-  //   span.textContent = value;
-  // }
-
-  // function adicionarCarrinho() {
-  //   let sabores = document.querySelectorAll('.checkbox-btn');
-  //   let pedido = [];
-  //   let totalGeral = 0;
-
-  //   sabores.forEach(sabor => {
-  //     let quantidade = parseInt(sabor.querySelector('.quantity-control span').textContent);
-  //     let nome = sabor.querySelector('.label-content span').textContent;
-  //     let precoTexto = sabor.querySelector('.price').textContent.replace("R$","").replace(",",".").trim();
-  //     let preco = parseFloat(precoTexto);
-
-  //     if (quantidade > 0) {
-  //       let subtotal = quantidade * preco;
-  //       totalGeral += subtotal;
-  //       pedido.push(`${nome} x${quantidade} - R$ ${subtotal.toFixed(2).replace(".",",")}`);
-  //     }
-  //   });
-
-  //   if (pedido.length > 0) {
-  //     pedido.push(`\nTotal: R$ ${totalGeral.toFixed(2).replace(".",",")}`);
-  //     alert("Milkshake\n" + pedido.join("\n"));
-  //   } else {
-  //     alert("Selecione ao menos 1 item.");
-  //   }
-  // }
 
    function changeQuantity(button, amount) {
       let span = button.parentElement.querySelector('span');
@@ -161,7 +129,7 @@
       });
 
       localStorage.setItem("carrinho", JSON.stringify(carrinho));
-      alert("Itens adicionados ao carrinho com sucesso!");
+      alert("Milkshake(s) adicionados ao carrinho com sucesso!");
       // window.location.href = "carrinho.html";
     }
 </script>

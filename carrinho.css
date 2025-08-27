@@ -20,7 +20,18 @@ body {
   margin-bottom: 10px;
 }
 
-h1,h2{
+#carrinho,h1,h2,p{
   text-align: center;
   margin: 25px;
 }
+
+#pagamento,#qrcode,#textCopyPix{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#dinheiroInfo,#pixInfo{
+  text-align: center;
+}
+
