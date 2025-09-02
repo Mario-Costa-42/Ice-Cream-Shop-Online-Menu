@@ -178,9 +178,9 @@ function enviarWhatsapp() {
   const numero = "5532984976952"; 
   const url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(textoFinal);
   window.location.href = url;
+  localStorage.clear();
 }
 
 // Inicialização
 document.addEventListener("DOMContentLoaded", carregarCarrinho);
-
 
