@@ -133,6 +133,60 @@
       // alert("Milkshake(s) adicionados ao carrinho com sucesso!");
       window.location.href = "carrinho.html"; 
     }
+
+
+
+
+
+    //ediçao do pedido no carrinho 
+    window.onload = function() {
+  atualizarBadgeCarrinho();
+
+  let editIndex = localStorage.getItem("editarIndex");
+  if (editIndex !== null) {
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    let item = carrinho[editIndex];
+
+    if (item && item.produto === "Milkshake") {
+      item.nome && document.querySelectorAll('.checkbox-btn').forEach(sabor => {
+        let nome = sabor.querySelector('.label-content span').textContent;
+        if (item.nome === nome) {
+          sabor.querySelector('.quantity-control span').textContent = item.quantidade;
+        }
+      });
+
+      document.getElementById("btnAdicionar").textContent = "Salvar Alterações";
+    }
+  }
+};
+
+
+   function adicionarCarrinho() {
+      let sabores = document.querySelectorAll('.checkbox-btn');
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+      sabores.forEach(sabor => {
+        let quantidade = parseInt(sabor.querySelector('.quantity-control span').textContent);
+        let nome = sabor.querySelector('.label-content span').textContent;
+        let precoTexto = sabor.querySelector('.price').textContent.replace("R$","").replace(",",".").trim();
+        let preco = parseFloat(precoTexto);
+
+        if (quantidade > 0) {
+          let subtotal = quantidade * preco;
+          carrinho.push({
+            produto: "Milkshake",
+            nome: nome,
+            quantidade: quantidade,
+            preco: preco,
+            subtotal: subtotal
+          });
+        }
+      });
+
+      localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      // alert("Milkshake(s) adicionados ao carrinho com sucesso!");
+      window.location.href = "carrinho.html"; 
+    }
 </script>
 
 <script src="utils.js"></script>

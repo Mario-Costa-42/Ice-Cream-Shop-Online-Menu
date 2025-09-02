@@ -7,9 +7,6 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #c4bcef;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   height: 100vh;
 }
 
@@ -44,11 +41,6 @@ button { padding: 12px 20px; margin: 5px; cursor: pointer; border: none; border-
 .btn-voltar { background: #bbb; color: #000; }
 #btnWhatsapp { background: #25D366; color: white; display: flex; align-items: center; gap: 8px; margin: auto; }
 #btnWhatsapp img { width: 20px; }
-
-
-
-
-
 
 
 #pagamento,#qrcode,#textCopyPix{
