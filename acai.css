@@ -81,8 +81,8 @@ body {
     }
 
     .Quantidademl.selecionado {
-        background-color: #231942;
-        color: #fff;
+        background-color: #5cd40c !important;
+        /* color: #fff; */
         border-color: #c75b00;
         box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
         .preco {
@@ -97,7 +97,7 @@ body {
         color: #333;
     }
 
-#AcaiInformation{
+.AcaiInformation{
     text-align: center;
     font-size: 1em;
     color: #000;
@@ -138,8 +138,8 @@ body {
     }
 
     .sabor.selecionado {
-        background-color: #231942 !important;
-        color: #fff;
+        background-color: #5cd40c !important;
+        /* color: #fff; */
         border-color: #c75b00;
         box-shadow: 0px 4px 12px rgba(0,0,0,0.4);
         .preco {
