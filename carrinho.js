@@ -134,10 +134,6 @@ function editarItem(index) {
   } else {
     alert("Não é possível editar este item.");
   }
-  const carrinho = getCarrinho();
-  carrinho.splice(index, 1);
-  setCarrinho(carrinho);
-  carregarCarrinho();
 }
 
 function removerItem(index) {
