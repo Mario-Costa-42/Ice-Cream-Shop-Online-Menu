@@ -7,7 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #c4bcef;
+  background-color: #F8E9E1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,7 @@ body {
   margin-top: 100px;
   width: 100%;
   height: 100%;
-  background-color: #c4bcef;
+  background-color: #F8E9E1;
 }
 
 /* Título */
@@ -66,7 +66,7 @@ body {
 
 /* Botões específicos */
 .pedir {
-  background-color: #fff600;
+  background-color: #f16aad;
   border: 2px solid #000;
 }
 

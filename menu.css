@@ -7,7 +7,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #c4bcef;
+  background-color: #F8E9E1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,7 @@ body {
   padding: 30px;
   width: 100%;
   height: 100%;
-  background-color: #c4bcef;
+  background-color: #F8E9E1;
 }
 
 /* home */
@@ -68,10 +68,14 @@ body {
   font-weight: bold;
   color: #000;
   margin: 5px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 #sorvetertiaTitle {
   width: 240px;
+  margin-top: 40px;
 }
 
 /* Botões */
