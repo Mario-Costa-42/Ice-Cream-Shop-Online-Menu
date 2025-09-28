@@ -106,6 +106,12 @@ body {
   color: #fff;
 }
 
+.pronto {
+  background-color: #F069AE;
+  border: 2px solid #470040;
+  color: #fff;
+}
+
 .milkshake {
   background-color: #D99793;
   border: 2px solid rgb(170, 139, 0);

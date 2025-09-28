@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escolhas da Casa</title>
+  <link rel="icon" type="image/x-icon" href="./assets/emoji-de-sorvete.png">
+  <link rel="stylesheet" href="prontos.css" />
+</head>
+<body>
+  <a href="./menu.html" id="linkHome" style="display: inline-block;">
+    <img src="./assets/arrow_back.svg" alt="Início" id="home" />
+  </a>
+
+  <h1 id="EscolhaTitle">Escolhas da Casa</h1>
+
+  <!-- Seção de escolhas -->
+  <section id="sectionEscolhas">
+    <div class="container" onclick="selectContainer(this)">
+      <input type="radio" id="saborClassico" name="sabor" value="Classico">
+      <label for="saborClassico"></label>
+      <h2>Clássico</h2>
+      <p>leite condensado, leite em pó, paçoca e banana</p>
+    </div>
+
+    <div class="container" onclick="selectContainer(this)">
+      <input type="radio" id="saborOvomaltine" name="sabor" value="Ovomaltine">
+      <label for="saborOvomaltine"></label>
+      <h2>Ovomaltine</h2>
+      <p>leite condensado, leite em pó, ovomaltine e morango</p>
+    </div>
+
+    <div class="container" onclick="selectContainer(this)">
+      <input type="radio" id="saborKitKat" name="sabor" value="KitKat">
+      <label for="saborKitKat"></label>
+      <h2>KitKat</h2>
+      <p>leite condensado, leite em pó, kitkat e morango</p>
+    </div>
+
+    <div class="container" onclick="selectContainer(this)">
+      <input type="radio" id="saborKids" name="sabor" value="Kids">
+      <label for="saborKids"></label>
+      <h2>Kids</h2>
+      <p>leite condensado, leite em pó, confete e Tortuguita</p>
+    </div>
+
+    <div class="container" onclick="selectContainer(this)">
+      <input type="radio" id="saborTropical" name="sabor" value="Tropical">
+      <label for="saborTropical"></label>
+      <h2>Tropical</h2>
+      <p>leite condensado, leite em pó, morango, banana e uva verde</p>
+    </div>
+
+    <div class="container" onclick="selectContainer(this)">
+      <input type="radio" id="saborNutella" name="sabor" value="Nutella">
+      <label for="saborNutella"></label>
+      <h2>Nutella</h2>
+      <p>leite condensado, leite em pó, morango e Nutella</p>
+    </div>
+  </section>
+
+  <!-- Seção de preços -->
+  <section id="sectionPrecos" style="display:none;">
+    <h2 id="saborSelecionado"></h2>
+    <p id="preco300"></p>
+    <p id="preco500"></p>
+    <div class="navegacao">
+      <button onclick="voltar()">Voltar</button>
+      <button id="btnAdicionar" onclick="finalizar()">Adicionar ao Carrinho</button>
+    </div>
+  </section>
+
+  <script src="prontos.js"></script>
+</body>
+</html> 
