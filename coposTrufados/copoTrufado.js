@@ -315,7 +315,7 @@ const regrasGratis = {
 const precosExtras = {
   cobertura: 1.00,
   acompanhamento: 1.00,
-  frutas: 1.00
+  frutas: 1.00,
 };
 
 const precos = {
@@ -382,11 +382,15 @@ function selectContainer(el) {
       selecionado.tamanho = "300ml";
       selecionado.preco = precos[sabor].ml300;
       atualizarPreco();
+      p300.classList.add("selecionado");
+      p500.classList.remove("selecionado");
     };
     p500.onclick = () => {
       selecionado.tamanho = "500ml";
       selecionado.preco = precos[sabor].ml500;
       atualizarPreco();
+      p500.classList.add("selecionado");
+      p300.classList.remove("selecionado");
     };
   }
 

@@ -283,7 +283,10 @@ function descricaoItem(item) {
   if (item.produto === "Escolhas da Casa") {
     return `${item.produto}: ${item.sabor} ${item.volume} = R$ ${brl(item.subtotal)}`;
   }
-  return "Item";
+  if (item.produto === "Copos Trufados") {
+    return `${item.produto}: ${item.sabor} ${item.tamanho} ${item.coberturas} ${item.acompanhamentos} ${item.frutas} ${item}= R$ ${brl(item.subtotal)}`;
+  }
+  return "Item"; 
 }
 
 // Renderização unificada
