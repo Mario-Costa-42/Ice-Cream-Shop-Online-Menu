@@ -307,14 +307,15 @@
 
 // ------- CONFIGURAÇÃO DE REGRAS E PREÇOS EXTRA
 const regrasGratis = {
-  "300ml": { acompanhamentos: 2, coberturas: 1 },
-  "500ml": { acompanhamentos: 3, coberturas: 1 },
-  "default": { acompanhamentos: 3, coberturas: 1 }
+  "300ml": { acompanhamentos: 2, coberturas: 1, frutas: 1 },
+  "500ml": { acompanhamentos: 3, coberturas: 1, frutas: 1 },
+  "default": { acompanhamentos: 3, coberturas: 1, frutas: 1 }
 };
 
 const precosExtras = {
   cobertura: 1.00,
-  acompanhamento: 1.00
+  acompanhamento: 1.00,
+  frutas: 1.00
 };
 
 const precos = {
@@ -350,6 +351,7 @@ let selecionado = {
   subtotal: 0,
   coberturas: [],
   acompanhamentos: [],
+  frutas: [],
   extras: []
 };
 
@@ -419,6 +421,14 @@ function atualizarPreco() {
     subtotal += (acompanhamentos.length - regra.acompanhamentos) * precosExtras.acompanhamento;
   }
   selecionado.acompanhamentos = acompanhamentos;
+
+  // frutas
+  const frutas = [...document.querySelectorAll(".sabor.selecionado[data-tipo='frutas']")]
+    .map(e => e.textContent.trim());
+  if (frutas.length > regra.frutas) {
+    subtotal += (frutas.length - regra.frutas) * precosExtras.frutas;
+  }
+  selecionado.frutas = frutas;
 
   // Extras
   const extras = [...document.querySelectorAll(".sabor.selecionado[data-tipo='extra']")]
