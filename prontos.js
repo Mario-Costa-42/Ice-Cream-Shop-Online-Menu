@@ -323,7 +323,7 @@ function finalizar() {
 
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-  alert(`${selecionado.sabor} ${selecionado.volume} R$${selecionado.preco.toFixed(2).replace(".", ",")} adicionado ao carrinho!`);
+  // alert(`${selecionado.sabor} ${selecionado.volume} R$${selecionado.preco.toFixed(2).replace(".", ",")} adicionado ao carrinho!`);
 
   window.location.href = "carrinho.html";
 }

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copos Trufados</title>
+  <link rel="icon" type="image/x-icon" href="../assets/emoji-de-sorvete.png">
+  <link rel="stylesheet" href="copoTrufado.css" />
+</head>
+<body>
+  <div class="container">
+    <a href="../menu.html" id="linkHome">
+      <img src="../assets/arrow_back.svg" alt="Início" id="home" />
+    </a>
+
+    <h1 class="title">Copos Trufados</h1>
+
+    <!-- Página 1: Escolha de Sabor -->
+    <section class="pagina" id="pagina1">
+      <div class="containerDeSabores" onclick="selectContainer(this)">
+        <input type="radio" id="saborClassico" name="sabor" value="Açaí trufado de Nutella">
+        <label for="Açaí trufado de Nutella"></label>
+        <h2>Açaí trufado de Nutella</h2>
+      </div>
+
+      <div class="containerDeSabores" onclick="selectContainer(this)">
+        <input type="radio" id="saborOvomaltine" name="sabor" value="Açaí trufado creme de ninho">
+        <label for="Açaí trufado creme de ninho"></label>
+        <h2>Açaí trufado creme de ninho</h2>
+      </div>
+
+      <div class="containerDeSabores" onclick="selectContainer(this)">
+        <input type="radio" id="saborKitKat" name="sabor" value="Açaí trufado 2 amores">
+        <label for="Açaí trufado 2 amores"></label>
+        <h2>Açaí trufado 2 amores</h2>
+      </div>
+
+      <div class="containerDeSabores" onclick="selectContainer(this)">
+        <input type="radio" id="saborKids" name="sabor" value="Açaí trufado creme paçoca">
+        <label for="Açaí trufado creme paçoca"></label>
+        <h2>Açaí trufado creme paçoca</h2>
+      </div>
+    </section>
+
+    <!-- Página 2: Preços -->
+    <section class="pagina" id="pagina2" style="display:none;">
+      <h2 id="saborSelecionado"></h2>
+      <p id="preco300"></p>
+      <p id="preco500"></p>
+      <div class="navegacao">
+        <button onclick="paginaAnterior()">Voltar</button>
+        <button onclick="proximaPagina()">Próximo</button>
+      </div>
+    </section>
+
+    <!-- Página 3: Cobertura grátis -->
+    <section class="pagina" id="pagina3" style="display:none; min-height: 110vh;">
+      <h2 class="AcaiInformation">Escolha uma cobertura grátis</h2>
+      <div class="saboresContainer">
+        <div class="sabor" data-tipo="cobertura" style="background-color: #8d6e63;">Chocolate</div>
+        <div class="sabor" data-tipo="cobertura" style="background-color: #ff4f8b;">Morango</div>
+        <div class="sabor" data-tipo="cobertura" style="background-color: #8a69b6;">Uva</div>
+        <div class="sabor" data-tipo="cobertura" style="background-color: #84a98c;">Menta</div>
+        <div class="sabor" data-tipo="cobertura" style="background-color: #A3451F;">Caramelo</div>
+        <div class="sabor" data-tipo="cobertura" style="background-color: #C96D92;">Tutti frutti</div>
+        <div class="sabor" data-tipo="cobertura" style="background-color: #368BC1;">Blue ice</div>
+        <div class="sabor" data-tipo="cobertura" style="background-color: #FFC685;">Leite condensado</div>
+      </div>
+      <div class="navegacao">
+        <button onclick="paginaAnterior()">Voltar</button>
+        <button onclick="proximaPagina()">Próximo</button>
+      </div>
+    </section>
+
+    <!-- Página 4: Acompanhamentos -->
+    <section class="pagina" id="pagina4" style="display:none; min-height: 140vh;">
+      <h2 class="AcaiInformation">Escolha os acompanhamentos grátis</h2>
+      <div class="saboresContainer">
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #fff;">Leite ninho</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #B2794C;">Paçoca</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #005FA7;">Disquete</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #A43C20;">Amendoim</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #8F491E;">Chocobool</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #8d6e63;">Chocopower</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #8d6e63;">Granola</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #E8DAC0;">Farinha Lactea</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #FDEF04;">Jujuba</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #F5E9E7;">Coco ralado</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #F6BC68;">Canudinho</div>
+        <div class="sabor" data-tipo="acompanhamento" style="background-color: #8d6e63;">Granulado</div>
+      </div>
+      <div class="navegacao">
+        <button onclick="paginaAnterior()">Voltar</button>
+        <button onclick="proximaPagina()">Próximo</button>
+      </div>
+    </section>
+
+    <!-- Página 5: Frutas -->
+    <section class="pagina" id="pagina5" style="display:none;">
+      <h2 class="AcaiInformation">Frutas (apenas uma grátis)</h2>
+      <div class="saboresContainer">
+        <div class="sabor" data-tipo="extra">Morango</div>
+        <div class="sabor" data-tipo="extra">Banana</div>
+        <div class="sabor" data-tipo="extra">Uva verde</div>
+      </div>
+      <div class="navegacao">
+        <button onclick="paginaAnterior()">Voltar</button>
+        <button onclick="proximaPagina()">Próximo</button>
+      </div>
+    </section>
+
+    <!-- Página 6: Adicionais -->
+    <section class="pagina" id="pagina6" style="display:none; min-height: 80vh;">
+      <h2 class="AcaiInformation">Adicionais extras</h2>
+      <div class="saboresContainer">
+          <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #DD6831;">Ovomaltine <span class="preco">R$2,00</span></div>
+          <div class="sabor" data-tipo="extra" data-preco="5.50" style="background-color: #c07e55;">Nutella <span class="preco">R$5,50</span></div>
+          <div class="sabor" data-tipo="extra" data-preco="6.00" style="background-color: #e5383b;">KitKat <span class="preco">R$6,00</span></div>
+          <div class="sabor" data-tipo="extra" data-preco="3.50" style="background-color: #00A1D9;">Trento <span class="preco">R$3,50</span></div>
+          <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #e76f51;">Fine <span class="preco">R$2,00</span></div>
+          <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #e0e1dd;">Marshmallow <span class="preco">R$2,00</span></div>
+      <div class="navegacao">
+        <button onclick="paginaAnterior()">Voltar</button>
+        <button id="btnAdicionar" onclick="finalizar()">Adicionar ao Carrinho</button>
+      </div>
+    </section>
+
+  </div>
+  <div id="precoTotal">Total: R$0,00</div>
+  <script src="copoTrufado.js"></script>
+</body>
+</html>
