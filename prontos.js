@@ -317,13 +317,50 @@ function finalizar() {
   }
 
   let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  const editIndex = localStorage.getItem("editarIndex");
 
-  // adiciona o item com subtotal
-  carrinho.push({ ...selecionado });
+  if (editIndex !== null) {
+    // Atualiza o item existente
+    carrinho[editIndex] = { ...selecionado };
+    localStorage.removeItem("editarIndex");
+  } else {
+    // Adiciona novo item
+    carrinho.push({ ...selecionado });
+  }
 
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-  // alert(`${selecionado.sabor} ${selecionado.volume} R$${selecionado.preco.toFixed(2).replace(".", ",")} adicionado ao carrinho!`);
-
   window.location.href = "carrinho.html";
 }
+
+
+function preencherEdicaoSeNecessario() {
+  const editIndex = localStorage.getItem("editarIndex");
+  if (editIndex === null) return;
+
+  const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+  const item = carrinho[editIndex];
+  if (!item || item.produto !== "Escolhas da Casa") return;
+
+  selecionado = item;
+
+  // Marca o sabor automaticamente
+  const saborRadio = document.querySelector(`input[value="${item.sabor}"]`);
+  if (saborRadio) {
+    saborRadio.checked = true;
+    saborRadio.closest(".container").classList.add("selected");
+    selectContainer(saborRadio.closest(".container"));
+  }
+
+  // Marca o volume (300ml ou 500ml)
+  if (item.volume === "300ml") {
+    document.getElementById("preco300").click();
+  } else if (item.volume === "500ml") {
+    document.getElementById("preco500").click();
+  }
+
+  // Atualiza o texto do botão
+  const btn = document.getElementById("btnFinalizar");
+  if (btn) btn.textContent = "Salvar Alterações";
+}
+
+document.addEventListener("DOMContentLoaded", preencherEdicaoSeNecessario);

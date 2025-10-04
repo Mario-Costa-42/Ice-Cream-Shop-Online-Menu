@@ -284,8 +284,25 @@ function descricaoItem(item) {
     return `${item.produto}: ${item.sabor} ${item.volume} = R$ ${brl(item.subtotal)}`;
   }
   if (item.produto === "Copos Trufados") {
-    return `${item.produto}: ${item.sabor} ${item.tamanho} ${item.coberturas} ${item.acompanhamentos} ${item.frutas} ${item}= R$ ${brl(item.subtotal)}`;
-  }
+  const coberturas = (item.coberturas && item.coberturas.length)
+    ? item.coberturas.join(", ")
+    : "Nenhuma";
+
+  const acompanhamentos = (item.acompanhamentos && item.acompanhamentos.length)
+    ? item.acompanhamentos.join(", ")
+    : "Nenhum";
+
+  const frutas = (item.frutas && item.frutas.length)
+    ? item.frutas.join(", ")
+    : "Nenhuma";
+
+  const extras = (item.extras && item.extras.length)
+    ? item.extras.map(e => `${e.nome} (+R$ ${brl(e.preco)})`).join(", ")
+    : "Nenhum";
+
+  return `${item.produto}: ${item.sabor} ${item.tamanho} - Coberturas: ${coberturas} - Acompanhamentos: ${acompanhamentos} - Frutas: ${frutas} - Extras: ${extras} = R$ ${brl(item.subtotal)}`;
+}
+
   return "Item"; 
 }
 
@@ -372,6 +389,10 @@ function editarItem(index) {
     window.location.href = "acai.html";
   } else if (item.produto === "Milkshake") {
     window.location.href = "milkshake.html";
+  } else if (item.produto === "Escolhas da Casa") {
+    window.location.href = "prontos.html";
+  } else if (item.produto === "Copos Trufados") {
+    window.location.href = "./coposTrufados/copoTrufado.html";
   } else {
     alert("Não é possível editar este item.");
   }

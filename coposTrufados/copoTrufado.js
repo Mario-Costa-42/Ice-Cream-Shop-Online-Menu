@@ -318,6 +318,8 @@ const precosExtras = {
   frutas: 1.00,
 };
 
+const acompanhamento = document.getElementById("acompanhamento");
+
 const precos = {
   "Açaí trufado de Nutella": { ml300: 24.00, ml500: 28.00 },
   "Açaí trufado creme de ninho": { ml300: 20.00, ml500: 24.00 },
@@ -384,6 +386,7 @@ function selectContainer(el) {
       atualizarPreco();
       p300.classList.add("selecionado");
       p500.classList.remove("selecionado");
+      acompanhamento.innerText = "Escolha 2 acompanhamentos grátis";
     };
     p500.onclick = () => {
       selecionado.tamanho = "500ml";
@@ -391,6 +394,7 @@ function selectContainer(el) {
       atualizarPreco();
       p500.classList.add("selecionado");
       p300.classList.remove("selecionado");
+      acompanhamento.innerText = "Escolha 3 acompanhamentos grátis";
     };
   }
 
