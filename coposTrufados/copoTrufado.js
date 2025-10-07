@@ -315,7 +315,7 @@ const regrasGratis = {
 const precosExtras = {
   cobertura: 1.00,
   acompanhamento: 1.00,
-  frutas: 1.00,
+  // frutas: 1.00,
 };
 
 const acompanhamento = document.getElementById("acompanhamento");
@@ -430,13 +430,30 @@ function atualizarPreco() {
   }
   selecionado.acompanhamentos = acompanhamentos;
 
-  // frutas
-  const frutas = [...document.querySelectorAll(".sabor.selecionado[data-tipo='frutas']")]
-    .map(e => e.textContent.trim());
-  if (frutas.length > regra.frutas) {
-    subtotal += (frutas.length - regra.frutas) * precosExtras.frutas;
-  }
-  selecionado.frutas = frutas;
+  // ------- FRUTAS (preços individuais) -------
+  const frutasSelecionadas = [...document.querySelectorAll(".sabor.selecionado[data-tipo='frutas']")];
+
+  // salva nomes e preços
+  const frutas = frutasSelecionadas.map(e => ({
+    nome: e.childNodes[0].textContent.trim(),
+    preco: parseFloat(e.getAttribute("data-preco")) || 0
+  }));
+
+  // aplica regra de frutas grátis
+  const regraFrutasGratis = getRegra(selecionado.tamanho).frutas || 0;
+
+  // frutas grátis (não somam no preço)
+  const frutasGratis = frutas.slice(0, regraFrutasGratis);
+
+  // frutas pagas (a partir do limite grátis)
+  const frutasPagas = frutas.slice(regraFrutasGratis);
+
+  // soma apenas as pagas
+  frutasPagas.forEach(f => subtotal += f.preco);
+
+  // salva no objeto selecionado
+  selecionado.frutas = frutas.map(f => f.nome);
+
 
   // Extras
   const extras = [...document.querySelectorAll(".sabor.selecionado[data-tipo='extra']")]
@@ -510,6 +527,13 @@ function preencherEdicaoSeNecessario() {
   // Acompanhamentos
   (item.acompanhamentos || []).forEach(a => {
     const div = [...document.querySelectorAll(".sabor[data-tipo='acompanhamento']")]
+      .find(el => el.textContent.trim() === a);
+    if (div) div.classList.add("selecionado");
+  });
+
+  // Frutas
+  (item.frutas || []).forEach(a => {
+    const div = [...document.querySelectorAll(".sabor[data-tipo='frutas']")]
       .find(el => el.textContent.trim() === a);
     if (div) div.classList.add("selecionado");
   });
