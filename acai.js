@@ -1,6 +1,6 @@
 // ------- CONFIGURAÇÃO DE REGRAS E PREÇOS EXTRA
 const regrasGratis = {
-  "300ml": { acompanhamentos: 2, coberturas: 1 },
+  "300ml": { acompanhamentos: 3, coberturas: 1 },
   "500ml": { acompanhamentos: 3, coberturas: 1 },
   "default": { acompanhamentos: 3, coberturas: 1 }
 };
@@ -46,8 +46,8 @@ function atualizarPreco() {
   if (regra.acompanhamentos === 3) {
     AconpaTitle.textContent = "Escolha 3 acompanhamentos grátis";
   }
-  if (regra.acompanhamentos === 2) {
-    AconpaTitle.textContent = "Escolha 2 acompanhamentos grátis";
+  if (regra.acompanhamentos === 3) {
+    AconpaTitle.textContent = "Escolha 3 acompanhamentos grátis";
   }
   if (acompanhamentos.length > regra.acompanhamentos) {
     precoTotal += (acompanhamentos.length - regra.acompanhamentos) * precosExtras.acompanhamento;

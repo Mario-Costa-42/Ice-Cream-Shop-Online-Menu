@@ -1,6 +1,6 @@
 // ------- CONFIGURAÇÃO DE REGRAS E PREÇOS EXTRA
 const regrasGratis = {
-  "300ml": { acompanhamentos: 2, coberturas: 1, frutas: 1 },
+  "300ml": { acompanhamentos: 3, coberturas: 1, frutas: 1 },
   "500ml": { acompanhamentos: 3, coberturas: 1, frutas: 1 },
   "default": { acompanhamentos: 3, coberturas: 1, frutas: 1 }
 };
@@ -78,7 +78,7 @@ function selectContainer(el) {
       atualizarPreco();
       p300.classList.add("selecionado");
       p500.classList.remove("selecionado");
-      acompanhamento.innerText = "Escolha 2 acompanhamentos grátis";
+      acompanhamento.innerText = "Escolha 3 acompanhamentos grátis";
     };
     p500.onclick = () => {
       selecionado.tamanho = "500ml";
