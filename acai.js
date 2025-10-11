@@ -29,6 +29,7 @@ function paginaAnterior() { if (paginaAtual > 0) mostrarPagina(paginaAtual - 1);
 // ------- PREÇO EM TEMPO REAL
 function atualizarPreco() {
   let precoTotal = 0;
+  let AconpaTitle = document.getElementById("AconpaTitle");
 
   const tamanho = document.querySelector(".Quantidademl.selecionado");
   if (tamanho) precoTotal += parseFloat(tamanho.getAttribute("data-preco"));
@@ -42,9 +43,15 @@ function atualizarPreco() {
   }
 
   const acompanhamentos = [...document.querySelectorAll(".sabor.selecionado[data-tipo='acompanhamento']")];
+  if (regra.acompanhamentos === 3) {
+    AconpaTitle.textContent = "Escolha 3 acompanhamentos grátis";
+  }
+  if (regra.acompanhamentos === 2) {
+    AconpaTitle.textContent = "Escolha 2 acompanhamentos grátis";
+  }
   if (acompanhamentos.length > regra.acompanhamentos) {
     precoTotal += (acompanhamentos.length - regra.acompanhamentos) * precosExtras.acompanhamento;
-  }
+  }  
 
   const extras = [...document.querySelectorAll(".sabor.selecionado[data-tipo='extra']")];
   extras.forEach(e => precoTotal += parseFloat(e.getAttribute("data-preco")));
