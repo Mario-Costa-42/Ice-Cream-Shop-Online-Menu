@@ -1,7 +1,7 @@
 const precos = {
   "Classico": { ml300: 14.50, ml500: 19.50 },
   "Ovomaltine": { ml300: 18.00, ml500: 23.00 },
-  "KitKat": { ml300: 22.00, ml500: 28.00 },
+  "KitKat": { ml300: 22.00, ml500: 27.00 },
   "Kids": { ml300: 15.00, ml500: 20.00 },
   "Tropical": { ml300: 20.00, ml500: 24.00 },
   "Nutella": { ml300: 21.00, ml500: 26.00 }

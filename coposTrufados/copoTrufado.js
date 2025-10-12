@@ -15,7 +15,7 @@ const acompanhamento = document.getElementById("acompanhamento");
 const precos = {
   "Açaí trufado de Nutella": { ml300: 24.00, ml500: 28.00 },
   "Açaí trufado creme de ninho": { ml300: 20.00, ml500: 24.00 },
-  "Açaí trufado 2 amores": { ml300: 22.00, ml500: 26.00 },
+  "Açaí trufado 2 amores": { ml300: 24.00, ml500: 28.00 },
   "Açaí trufado creme paçoca": { ml300: 20.00, ml500: 24.00 },
 };
 
