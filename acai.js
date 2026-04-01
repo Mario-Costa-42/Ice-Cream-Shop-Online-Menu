@@ -2,13 +2,15 @@
 const regrasGratis = {
   "300ml": { acompanhamentos: 3, coberturas: 1 },
   "500ml": { acompanhamentos: 3, coberturas: 1 },
-  "default": { acompanhamentos: 3, coberturas: 1 }
+  default: { acompanhamentos: 3, coberturas: 1 },
 };
 
 const precosExtras = {
-  cobertura: 1.00,        // preço por cobertura extra
-  acompanhamento: 1.00    // preço por acompanhamento extra
+  cobertura: 1.0, // preço por cobertura extra
+  acompanhamento: 1.0, // preço por acompanhamento extra
 };
+
+let quantidade = 1;
 
 function getRegra(tamanho) {
   return regrasGratis[tamanho] || regrasGratis["default"];
@@ -19,12 +21,16 @@ let paginaAtual = 0;
 const paginas = document.querySelectorAll(".pagina");
 
 function mostrarPagina(index) {
-  paginas.forEach(p => p.classList.remove("ativa"));
+  paginas.forEach((p) => p.classList.remove("ativa"));
   paginas[index].classList.add("ativa");
   paginaAtual = index;
 }
-function proximaPagina() { if (paginaAtual < paginas.length - 1) mostrarPagina(paginaAtual + 1); }
-function paginaAnterior() { if (paginaAtual > 0) mostrarPagina(paginaAtual - 1); }
+function proximaPagina() {
+  if (paginaAtual < paginas.length - 1) mostrarPagina(paginaAtual + 1);
+}
+function paginaAnterior() {
+  if (paginaAtual > 0) mostrarPagina(paginaAtual - 1);
+}
 
 // ------- PREÇO EM TEMPO REAL
 function atualizarPreco() {
@@ -34,15 +40,24 @@ function atualizarPreco() {
   const tamanho = document.querySelector(".Quantidademl.selecionado");
   if (tamanho) precoTotal += parseFloat(tamanho.getAttribute("data-preco"));
 
-  const tamanhoSelecionado = tamanho ? tamanho.getAttribute("data-tamanho") : null;
+  const tamanhoSelecionado = tamanho
+    ? tamanho.getAttribute("data-tamanho")
+    : null;
   const regra = getRegra(tamanhoSelecionado);
 
-  const coberturas = [...document.querySelectorAll(".sabor.selecionado[data-tipo='cobertura']")];
+  const coberturas = [
+    ...document.querySelectorAll(".sabor.selecionado[data-tipo='cobertura']"),
+  ];
   if (coberturas.length > regra.coberturas) {
-    precoTotal += (coberturas.length - regra.coberturas) * precosExtras.cobertura;
+    precoTotal +=
+      (coberturas.length - regra.coberturas) * precosExtras.cobertura;
   }
 
-  const acompanhamentos = [...document.querySelectorAll(".sabor.selecionado[data-tipo='acompanhamento']")];
+  const acompanhamentos = [
+    ...document.querySelectorAll(
+      ".sabor.selecionado[data-tipo='acompanhamento']",
+    ),
+  ];
   if (regra.acompanhamentos === 3) {
     AconpaTitle.textContent = "Escolha 3 acompanhamentos grátis";
   }
@@ -50,14 +65,34 @@ function atualizarPreco() {
     AconpaTitle.textContent = "Escolha 3 acompanhamentos grátis";
   }
   if (acompanhamentos.length > regra.acompanhamentos) {
-    precoTotal += (acompanhamentos.length - regra.acompanhamentos) * precosExtras.acompanhamento;
-  }  
+    precoTotal +=
+      (acompanhamentos.length - regra.acompanhamentos) *
+      precosExtras.acompanhamento;
+  }
 
-  const extras = [...document.querySelectorAll(".sabor.selecionado[data-tipo='extra']")];
-  extras.forEach(e => precoTotal += parseFloat(e.getAttribute("data-preco")));
+  const extras = [
+    ...document.querySelectorAll(".sabor.selecionado[data-tipo='extra']"),
+  ];
+  extras.forEach(
+    (e) => (precoTotal += parseFloat(e.getAttribute("data-preco"))),
+  );
+
+  // aplica quantidade
+  precoTotal *= quantidade;
 
   const visor = document.getElementById("precoTotal");
-  if (visor) visor.textContent = "Total: R$" + precoTotal.toFixed(2).replace(".", ",");
+  if (visor)
+    visor.textContent = "Total: R$" + precoTotal.toFixed(2).replace(".", ",");
+}
+
+function changeQuantity(delta) {
+  quantidade += delta;
+
+  if (quantidade < 1) quantidade = 1;
+
+  document.getElementById("quantidade").textContent = quantidade;
+
+  atualizarPreco();
 }
 
 // ------- BADGE CARRINHO
@@ -75,7 +110,9 @@ function atualizarBadgeCarrinho() {
 
 // ------- FINALIZAR (ADD/EDIT)
 function finalizar() {
-  const tamanhoSelecionado = document.querySelector(".Quantidademl.selecionado");
+  const tamanhoSelecionado = document.querySelector(
+    ".Quantidademl.selecionado",
+  );
   if (!tamanhoSelecionado) {
     alert("Selecione o tamanho do açaí!");
     return;
@@ -87,24 +124,32 @@ function finalizar() {
   const precoBase = parseFloat(tamanhoSelecionado.getAttribute("data-preco"));
   const regra = getRegra(tamanho);
 
-  const coberturas = [...document.querySelectorAll(".sabor.selecionado[data-tipo='cobertura']")]
-    .map(e => e.textContent.trim());
-  const acompanhamentos = [...document.querySelectorAll(".sabor.selecionado[data-tipo='acompanhamento']")]
-    .map(e => e.textContent.trim());
-  const extras = [...document.querySelectorAll(".sabor.selecionado[data-tipo='extra']")]
-    .map(e => ({
-      nome: e.childNodes[0].textContent.trim(),
-      preco: parseFloat(e.getAttribute("data-preco"))
-    }));
+  const coberturas = [
+    ...document.querySelectorAll(".sabor.selecionado[data-tipo='cobertura']"),
+  ].map((e) => e.textContent.trim());
+  const acompanhamentos = [
+    ...document.querySelectorAll(
+      ".sabor.selecionado[data-tipo='acompanhamento']",
+    ),
+  ].map((e) => e.textContent.trim());
+  const extras = [
+    ...document.querySelectorAll(".sabor.selecionado[data-tipo='extra']"),
+  ].map((e) => ({
+    nome: e.childNodes[0].textContent.trim(),
+    preco: parseFloat(e.getAttribute("data-preco")),
+  }));
 
-  let subtotal = precoBase + extras.reduce((sum, e) => sum + e.preco, 0);
+  let precoUnitario = precoBase + extras.reduce((sum, e) => sum + e.preco, 0);
 
   if (coberturas.length > regra.coberturas) {
-    subtotal += (coberturas.length - regra.coberturas) * precosExtras.cobertura;
+    precoUnitario +=
+      (coberturas.length - regra.coberturas) * precosExtras.cobertura;
   }
 
   if (acompanhamentos.length > regra.acompanhamentos) {
-    subtotal += (acompanhamentos.length - regra.acompanhamentos) * precosExtras.acompanhamento;
+    precoUnitario +=
+      (acompanhamentos.length - regra.acompanhamentos) *
+      precosExtras.acompanhamento;
   }
 
   const novoItem = {
@@ -113,8 +158,9 @@ function finalizar() {
     coberturas,
     acompanhamentos,
     extras,
-    preco: precoBase,
-    subtotal
+    precoUnitario,
+    quantidade,
+    subtotal: precoUnitario * quantidade,
   };
 
   const editIndex = localStorage.getItem("editarIndex");
@@ -140,27 +186,32 @@ function preencherEdicaoSeNecessario() {
   if (!item || item.produto !== "Açaí") return;
 
   // Tamanho
-  const tamanhoDiv = document.querySelector(`.Quantidademl[data-tamanho="${item.tamanho}"]`);
+  const tamanhoDiv = document.querySelector(
+    `.Quantidademl[data-tamanho="${item.tamanho}"]`,
+  );
   if (tamanhoDiv) tamanhoDiv.classList.add("selecionado");
 
   // Coberturas
-  (item.coberturas || []).forEach(c => {
-    const div = [...document.querySelectorAll(".sabor[data-tipo='cobertura']")]
-      .find(el => el.textContent.trim() === c);
+  (item.coberturas || []).forEach((c) => {
+    const div = [
+      ...document.querySelectorAll(".sabor[data-tipo='cobertura']"),
+    ].find((el) => el.textContent.trim() === c);
     if (div) div.classList.add("selecionado");
   });
 
   // Acompanhamentos
-  (item.acompanhamentos || []).forEach(a => {
-    const div = [...document.querySelectorAll(".sabor[data-tipo='acompanhamento']")]
-      .find(el => el.textContent.trim() === a);
+  (item.acompanhamentos || []).forEach((a) => {
+    const div = [
+      ...document.querySelectorAll(".sabor[data-tipo='acompanhamento']"),
+    ].find((el) => el.textContent.trim() === a);
     if (div) div.classList.add("selecionado");
   });
 
   // Extras
-  (item.extras || []).forEach(e => {
-    const div = [...document.querySelectorAll(".sabor[data-tipo='extra']")]
-      .find(el => el.childNodes[0].textContent.trim() === e.nome);
+  (item.extras || []).forEach((e) => {
+    const div = [
+      ...document.querySelectorAll(".sabor[data-tipo='extra']"),
+    ].find((el) => el.childNodes[0].textContent.trim() === e.nome);
     if (div) div.classList.add("selecionado");
   });
 
@@ -168,6 +219,11 @@ function preencherEdicaoSeNecessario() {
   const btn = document.getElementById("btnAdicionar");
   if (btn) btn.textContent = "Salvar Alterações";
 
+  // quantidade
+  quantidade = item.quantidade || 1;
+
+  const qtdSpan = document.getElementById("quantidade");
+  if (qtdSpan) qtdSpan.textContent = quantidade;
   // *** ESSENCIAL: recalcular depois de preencher ***
   atualizarPreco();
 }
@@ -175,16 +231,18 @@ function preencherEdicaoSeNecessario() {
 // ------- INICIALIZAÇÃO SEGURA
 document.addEventListener("DOMContentLoaded", () => {
   // Listeners de clique (tamanhos)
-  document.querySelectorAll(".Quantidademl").forEach(div => {
+  document.querySelectorAll(".Quantidademl").forEach((div) => {
     div.addEventListener("click", () => {
-      document.querySelectorAll(".Quantidademl").forEach(d => d.classList.remove("selecionado"));
+      document
+        .querySelectorAll(".Quantidademl")
+        .forEach((d) => d.classList.remove("selecionado"));
       div.classList.add("selecionado");
       atualizarPreco();
     });
   });
 
   // Listeners de clique (sabores)
-  document.querySelectorAll(".sabor").forEach(div => {
+  document.querySelectorAll(".sabor").forEach((div) => {
     div.addEventListener("click", () => {
       div.classList.toggle("selecionado");
       atualizarPreco();

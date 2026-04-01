@@ -43,7 +43,7 @@ function descricaoItem(item) {
       : "Nenhum";
     const cob = (item.coberturas && item.coberturas.length) ? item.coberturas.join(", ") : "Nenhuma";
     const acomp = (item.acompanhamentos && item.acompanhamentos.length) ? item.acompanhamentos.join(", ") : "Nenhum";
-    return `${item.produto} ${item.tamanho} - Coberturas: ${cob} - Acompanhamentos: ${acomp} - Extras: ${extrasTxt} = R$ ${brl(item.subtotal)}`;
+    return `${item.produto} ${item.tamanho} x${item.quantidade || 1} - Coberturas: ${cob} - Acompanhamentos: ${acomp} - Extras: ${extrasTxt} = R$ ${brl(item.subtotal)}`;
   }
   if (item.produto === "Escolhas da Casa") {
     return `${item.produto}: ${item.sabor} ${item.volume} = R$ ${brl(item.subtotal)}`;

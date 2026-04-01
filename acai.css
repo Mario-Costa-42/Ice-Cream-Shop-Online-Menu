@@ -97,6 +97,36 @@ body {
         color: #333;
     }
 
+.quantity-wrapper {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.quantity-control button {
+  font-size: 20px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: 2px solid #000;
+  background-color: #ffbd00;
+  cursor: pointer;
+}
+
+.quantity-control span {
+  font-size: 20px;
+  font-weight: bold;
+  min-width: 30px;
+  text-align: center;
+}
+
+
 .AcaiInformation{
     text-align: center;
     font-size: 1em;
