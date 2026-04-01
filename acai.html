@@ -1,404 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Açaí</title>
-    <link rel="icon" type="image/x-icon" href="./assets/emoji-de-sorvete.png" />
-    <link rel="stylesheet" href="acai.css" />
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
-      .pagina {
-        display: none;
-        text-align: center;
-      }
-      .pagina.ativa {
-        display: block;
-      }
-      .sabor,
-      .Quantidademl {
-        cursor: pointer;
-        margin: 5px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-      }
-      .selecionado {
-        border: 2px solid #4caf50;
-      }
-      #precoTotal {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: #4caf50;
-        color: white;
-        font-size: 20px;
-        padding: 10px;
-        text-align: center;
-        z-index: 999;
-      }
-      .navegacao {
-        margin-top: 20px;
-      }
-      button {
-        padding: 10px 20px;
-        margin: 5px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
-  <body>
-    <section class="pagina ativa" id="pagina1">
-      <h1 id="AcaiTitle">Monte o seu Açaí</h1>
-      <h2>Escolha o tamanho do copo</h2>
-      <div id="tamanhosContainer">
-        <div class="Quantidademl" data-tamanho="300ml" data-preco="13.00">
-          300ml - R$13,00
-        </div>
-        <div class="Quantidademl" data-tamanho="500ml" data-preco="18.00">
-          500ml - R$18,00
-        </div>
-      </div>
-      <div class="navegacao">
-        <button>
-          <a href="./menu.html" style="text-decoration: none; color: black"
-            >Voltar</a
-          >
-        </button>
-        <button onclick="proximaPagina()">Próximo</button>
-      </div>
-    </section>
+    <link rel="icon" type="image/x-icon" href="./assets/emoji-de-sorvete.png">
+    <link rel="stylesheet" href="acai.css"/>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .pagina { display: none; text-align: center; }
+    .pagina.ativa { display: block; }
+    .sabor, .Quantidademl { cursor: pointer; margin: 5px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
+    .selecionado { border: 2px solid #4CAF50; }
+    #precoTotal {
+      position: fixed; bottom: 0; left: 0; width: 100%; 
+      background: #4CAF50; color: white; font-size: 20px;
+      padding: 10px; text-align: center; z-index: 999;
+    }
+    .navegacao { margin-top: 20px; }
+    button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
 
-    <section class="pagina" id="pagina2" style="min-height: 110vh">
-      <h2 class="AcaiInformation">Escolha uma cobertura grátis</h2>
-      <div id="saboresContainer">
-        <div
-          class="sabor"
-          data-tipo="cobertura"
-          style="background-color: #8d6e63"
-        >
-          Chocolate
-        </div>
-        <div
-          class="sabor"
-          data-tipo="cobertura"
-          style="background-color: #ff4f8b"
-        >
-          Morango
-        </div>
-        <div
-          class="sabor"
-          data-tipo="cobertura"
-          style="background-color: #8a69b6"
-        >
-          Uva
-        </div>
-        <div
-          class="sabor"
-          data-tipo="cobertura"
-          style="background-color: #84a98c"
-        >
-          Menta
-        </div>
-        <div
-          class="sabor"
-          data-tipo="cobertura"
-          style="background-color: #a3451f"
-        >
-          Caramelo
-        </div>
-        <div
-          class="sabor"
-          data-tipo="cobertura"
-          style="background-color: #c96d92"
-        >
-          Tutti frutti
-        </div>
-        <div
-          class="sabor"
-          data-tipo="cobertura"
-          style="background-color: #368bc1"
-        >
-          Blue ice
-        </div>
-        <div
-          class="sabor"
-          data-tipo="cobertura"
-          style="background-color: #ffc685"
-        >
-          Leite condensado
-        </div>
-      </div>
 
-      <div class="navegacao">
-        <button onclick="paginaAnterior()">Voltar</button>
-        <button onclick="proximaPagina()">Próximo</button>
-      </div>
-    </section>
 
-    <section class="pagina" id="pagina3" style="min-height: 140vh">
-      <h2 class="AcaiInformation" id="AconpaTitle">
-        Escolha os acompanhamentos grátis
-      </h2>
-      <div
-        id="saboresContainer"
-        style="display: flex; flex-direction: column; align-items: center"
-      >
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #fff"
-        >
-          Leite ninho
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #b2794c"
-        >
-          Paçoca
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #005fa7"
-        >
-          Disquete
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #a43c20"
-        >
-          Amendoim
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #8f491e"
-        >
-          Chocobool
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #8d6e63"
-        >
-          Chocopower
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #8d6e63"
-        >
-          Granola
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #e8dac0"
-        >
-          Farinha Lactea
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #fdef04"
-        >
-          Jujuba
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #f5e9e7"
-        >
-          Coco ralado
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #f6bc68"
-        >
-          Canudinho
-        </div>
-        <div
-          class="sabor"
-          data-tipo="acompanhamento"
-          style="background-color: #8d6e63"
-        >
-          Granulado
-        </div>
-      </div>
+<section class="pagina ativa" id="pagina1">
+  <h1 id="AcaiTitle">Monte o seu Açaí</h1>
+  <h2>Escolha o tamanho do copo</h2>
+  <div id="tamanhosContainer">
+  <div class="Quantidademl" data-tamanho="300ml" data-preco="13.00">300ml - R$13,00</div>
+  <div class="Quantidademl" data-tamanho="500ml" data-preco="18.00">500ml - R$18,00</div>
+  </div>
+  <div class="navegacao">
+    <button><a href="./menu.html" style="text-decoration: none; color: black;">Voltar</a></button>
+    <button onclick="proximaPagina()">Próximo</button>
+  </div>
+</section>
 
-      <div class="navegacao">
-        <button onclick="paginaAnterior()">Voltar</button>
-        <button onclick="proximaPagina()">Próximo</button>
-      </div>
-    </section>
 
-    <section class="pagina" id="pagina4" style="min-height: 250vh">
-      <h2 class="AcaiInformation">Adicionais extras</h2>
+<section class="pagina" id="pagina2" style="min-height: 110vh;">
+  <h2 class="AcaiInformation">Escolha uma cobertura grátis</h2>
+  <div id="saboresContainer">
+  <div class="sabor" data-tipo="cobertura" style="background-color: #8d6e63;">Chocolate</div>
+  <div class="sabor" data-tipo="cobertura" style="background-color: #ff4f8b;">Morango</div>
+  <div class="sabor" data-tipo="cobertura" style="background-color: #8a69b6;">Uva</div>
+  <div class="sabor" data-tipo="cobertura" style="background-color: #84a98c;">Menta</div>
+  <div class="sabor" data-tipo="cobertura" style="background-color: #A3451F;">Caramelo</div>
+  <div class="sabor" data-tipo="cobertura" style="background-color: #C96D92;">Tutti frutti</div>
+  <div class="sabor" data-tipo="cobertura" style="background-color: #368BC1;">Blue ice</div>
+  <div class="sabor" data-tipo="cobertura" style="background-color: #FFC685;">Leite condensado</div>
+  </div>
 
-      <div
-        id="saboresContainer"
-        style="display: flex; flex-direction: column; align-items: center"
-      >
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.00"
-          style="background-color: #ff4f8b"
-        >
-          Morango <span class="preco">R$3,00</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="1.50"
-          style="background-color: #debe51"
-        >
-          Banana <span class="preco">R$1,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="2.00"
-          style="background-color: #b7ba4e"
-        >
-          Uva verde <span class="preco">R$2,00</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="2.00"
-          style="background-color: #dd6831"
-        >
-          Ovomaltine <span class="preco">R$2,00</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.50"
-          style="background-color: #ffd22f"
-        >
-          Creme ninho <span class="preco">R$3,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.50"
-          style="background-color: #d48db6"
-        >
-          Creme morango <span class="preco">R$3,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.50"
-          style="background-color: #f7e8e1"
-        >
-          Creme de paçoca <span class="preco">R$3,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.50"
-          style="background-color: #cbb99e"
-        >
-          Creme cookies <span class="preco">R$3,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.50"
-          style="background-color: #d37f66"
-        >
-          Creme brigadeiro <span class="preco">R$3,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.50"
-          style="background-color: #8d6e63"
-        >
-          Creme avelã <span class="preco">R$3,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="5.50"
-          style="background-color: #c07e55"
-        >
-          Nutella <span class="preco">R$5,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.50"
-          style="background-color: #c07e55"
-        >
-          Creme Bis <span class="preco">R$3,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="6.00"
-          style="background-color: #e5383b"
-        >
-          KitKat <span class="preco">R$6,00</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="3.50"
-          style="background-color: #00a1d9"
-        >
-          Trento <span class="preco">R$3,50</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="2.00"
-          style="background-color: #e76f51"
-        >
-          Fine <span class="preco">R$2,00</span>
-        </div>
-        <div
-          class="sabor"
-          data-tipo="extra"
-          data-preco="2.00"
-          style="background-color: #e0e1dd"
-        >
-          Marshmallow <span class="preco">R$2,00</span>
-        </div>
-        <!-- <div class="sabor" data-tipo="extra" data-preco="4.00" style="background-color: #FFD22F;">Creme Fini bananas <span class="preco">R$4,00</span></div> -->
-        <!-- <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #E89DB9;">Creme Fini beijos <span class="preco">R$4,00</span></div> -->
-        <!-- <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #FF5B61;">Creme Fini dentaduras <span class="preco">R$4,00</span></div> -->
-        <!-- aumentar o style="min-height: 250vh; para 300 qnd descomentar" -->
-      </div>
-      <div class="quantity-wrapper">
-        <h3>Quantidade</h3>
-        <div class="quantity-control">
-          <button type="button" onclick="changeQuantity(-1)">➖</button>
-          <span id="quantidade">1</span>
-          <button type="button" onclick="changeQuantity(1)">➕</button>
-        </div>
-      </div>
 
-      <div class="navegacao">
-        <button onclick="paginaAnterior()">Voltar</button>
-        <button id="btnAdicionar" onclick="finalizar()">
-          Adicionar ao Carrinho
-        </button>
-      </div>
-    </section>
+  <div class="navegacao">
+    <button onclick="paginaAnterior()">Voltar</button>
+    <button onclick="proximaPagina()">Próximo</button>
+  </div>
+</section>
 
-    <div id="precoTotal">Total: R$0,00</div>
 
-    <script src="acai.js"></script>
-    <script src="utils.js"></script>
-  </body>
+<section class="pagina" id="pagina3" style="min-height: 140vh;">
+  <h2 class="AcaiInformation" id="AconpaTitle">Escolha os acompanhamentos grátis</h2>
+<div id="saboresContainer" style="display: flex; flex-direction: column; align-items: center;">
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #fff;">Leite ninho</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #B2794C;">Paçoca</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #005FA7;">Disquete</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #A43C20;">Amendoim</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #8F491E;">Chocobool</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #8d6e63;">Chocopower</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #8d6e63;">Granola</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #E8DAC0;">Farinha Lactea</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #FDEF04;">Jujuba</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #F5E9E7;">Coco ralado</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #F6BC68;">Canudinho</div>
+  <div class="sabor" data-tipo="acompanhamento" style="background-color: #8d6e63;">Granulado</div>
+</div>
+
+
+  <div class="navegacao">
+    <button onclick="paginaAnterior()">Voltar</button>
+    <button onclick="proximaPagina()">Próximo</button>
+  </div>
+</section>
+
+<section class="pagina" id="pagina4" style="min-height: 250vh;">
+  <h2 class="AcaiInformation">Adicionais extras</h2>
+
+  <div id="saboresContainer" style="display: flex; flex-direction: column; align-items: center;">
+  <div class="sabor" data-tipo="extra" data-preco="3.00" style="background-color: #ff4f8b;">Morango <span class="preco">R$3,00</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="1.50" style="background-color: #DEBE51;">Banana <span class="preco">R$1,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #B7BA4E;">Uva verde <span class="preco">R$2,00</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #DD6831;">Ovomaltine <span class="preco">R$2,00</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="3.50" style="background-color: #FFD22F;">Creme ninho <span class="preco">R$3,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="3.50" style="background-color: #D48DB6;">Creme morango <span class="preco">R$3,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="3.50" style="background-color: #F7E8E1;">Creme de paçoca <span class="preco">R$3,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="3.50" style="background-color: #CBB99E;">Creme cookies <span class="preco">R$3,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="3.50" style="background-color: #d37f66;">Creme brigadeiro <span class="preco">R$3,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="5.00" style="background-color: #A6A358;">Creme pistache <span class="preco">R$5,00</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="5.50" style="background-color: #c07e55;">Nutella <span class="preco">R$5,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="5.50" style="background-color: #dd555b;">Creme KitKat <span class="preco">R$5,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="6.00" style="background-color: #e5383b;">KitKat <span class="preco">R$6,00</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="3.50" style="background-color: #00A1D9;">Trento <span class="preco">R$3,50</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #e76f51;">Fine <span class="preco">R$2,00</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #e0e1dd;">Marshmallow <span class="preco">R$2,00</span></div>
+  <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #FFD22F;">Creme Fini bananas <span class="preco">R$4,00</span></div>
+  <!-- <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #E89DB9;">Creme Fini beijos <span class="preco">R$4,00</span></div> -->
+  <!-- <div class="sabor" data-tipo="extra" data-preco="2.00" style="background-color: #FF5B61;">Creme Fini dentaduras <span class="preco">R$4,00</span></div> -->
+   <!-- aumentar o style="min-height: 250vh; para 300 qnd descomentar" -->
+</div>
+  <div class="navegacao">
+    <button onclick="paginaAnterior()">Voltar</button>
+    <button id="btnAdicionar" onclick="finalizar()">Adicionar ao Carrinho</button>
+  </div>
+</section>
+
+<div id="precoTotal">Total: R$0,00</div>
+
+<script src="acai.js"></script>
+<script src="utils.js"></script>
+
+
+</body>
 </html>
