@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitamina</title>
+    <link rel="icon" type="image/x-icon" href="./assets/emoji-de-sorvete.png">
+    <link rel="stylesheet" href="vitamina.css" />
+</head>
+<body>
+  <a href="./menu.html">
+      <img src="./assets/arrow_back.svg" alt="Início" id="home" />
+    </a>
+    <h1 id="MilkshakeTitle">Vitamina</h1>
+    <h2 id="Quantidademl">500ml</h2>
+
+<div class="container">
+
+  <label class="checkbox-btn AçaíComBanana">
+    <input type="checkbox" name="sabor" value="Açaí com banana">
+    <div class="label-content">
+      <span>Açaí com banana</span>
+      <div class="quantity-control">
+        <button type="button" onclick="changeQuantity(this, -1)">➖</button>
+        <span>0</span>
+        <button type="button" onclick="changeQuantity(this, 1)">➕</button>
+      </div>
+      <span class="price">R$ 10,00</span>
+    </div>
+  </label>
+
+  <button class="btn-carrinho" onclick="adicionarCarrinho()">🛒 Adicionar ao Carrinho</button>
+</div>
+
+<script>
+  function changeQuantity(button, amount) {
+    let span = button.parentElement.querySelector('span');
+    let value = parseInt(span.textContent) + amount;
+    if (value < 0) value = 0;
+    span.textContent = value;
+  }
+
+  window.onload = function () {
+    atualizarBadgeCarrinho();
+
+    let editIndex = localStorage.getItem("editarIndex");
+    if (editIndex !== null) {
+      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+      let item = carrinho[editIndex];
+
+      if (item && item.produto === "Vitamina") {
+        document.querySelectorAll('.checkbox-btn').forEach(sabor => {
+          let nome = sabor.querySelector('.label-content span').textContent;
+          if (item.nome === nome) {
+            sabor.querySelector('.quantity-control span').textContent = item.quantidade;
+          }
+        });
+
+        document.querySelector(".btn-carrinho").textContent = "Salvar Alterações";
+      }
+    }
+  };
+
+  function adicionarCarrinho() {
+    let sabores = document.querySelectorAll('.checkbox-btn');
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    let editIndex = localStorage.getItem("editarIndex");
+
+    // Se estiver editando, remove o item antigo antes de salvar os novos
+    if (editIndex !== null) {
+      carrinho.splice(editIndex, 1);
+      localStorage.removeItem("editarIndex");
+    }
+
+    sabores.forEach(sabor => {
+      let quantidade = parseInt(sabor.querySelector('.quantity-control span').textContent);
+      let nome = sabor.querySelector('.label-content span').textContent;
+      let precoTexto = sabor.querySelector('.price').textContent.replace("R$", "").replace(",", ".").trim();
+      let preco = parseFloat(precoTexto);
+
+      if (quantidade > 0) {
+        let subtotal = quantidade * preco;
+        carrinho.push({
+          produto: "Vitamina",
+          nome: nome,
+          quantidade: quantidade,
+          preco: preco,
+          subtotal: subtotal
+        });
+      }
+    });
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    window.location.href = "carrinho.html";
+  }
+</script>
+
+
+<script src="utils.js"></script>
+
+</body>
+
+</html>

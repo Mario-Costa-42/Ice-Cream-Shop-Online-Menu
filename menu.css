@@ -118,6 +118,12 @@ body {
   color: #fff;
 }
 
+.vitamina {
+  background-color: #d82bd2;
+  border: 2px solid #000;
+  color: #fff;
+}
+
 /* Responsividade: aplicar zoom em celulares */
 @media (max-width: 480px) {
   .container {

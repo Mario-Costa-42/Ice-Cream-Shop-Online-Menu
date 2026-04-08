@@ -104,6 +104,10 @@ function descricaoItem(item) {
     return `${item.produto}: ${item.sabor} ${item.tamanho} (x${qtd}) - Coberturas: ${coberturas} - Acompanhamentos: ${acompanhamentos} - Frutas: ${frutas} - Extras: ${extras} = R$ ${brl(totalItem)}`;
   }
 
+  if (item.produto === "Vitamina") {
+    return `${item.produto} - ${item.nome || ""} (x${qtd}) = R$ ${brl(totalItem)}`;
+  }
+
   return `Item (x${qtd}) = R$ ${brl(totalItem)}`;
 }
 
@@ -216,6 +220,8 @@ function editarItem(index) {
     window.location.href = "prontos.html";
   } else if (item.produto === "Copos Trufados") {
     window.location.href = "./coposTrufados/copoTrufado.html";
+  } else if (item.produto === "Vitamina") {
+    window.location.href = "vitamina.html";
   } else {
     alert("Não é possível editar este item.");
   }
