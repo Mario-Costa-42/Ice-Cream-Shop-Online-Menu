@@ -145,13 +145,12 @@
       let preco = parseFloat(precoTexto);
 
       if (quantidade > 0) {
-        let subtotal = quantidade * preco;
         carrinho.push({
           produto: "Milkshake",
           nome: nome,
           quantidade: quantidade,
           preco: preco,
-          subtotal: subtotal
+          subtotal: preco
         });
       }
     });
