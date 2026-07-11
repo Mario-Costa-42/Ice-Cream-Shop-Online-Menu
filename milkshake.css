@@ -6,140 +6,198 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #F8E9E1;
+  background-color: #f8e9e1;
   height: 100vh;
 }
 
-#home{
+#home {
   float: left;
   width: 30px;
   filter: brightness(0) saturate(100%) invert(0);
   margin-bottom: 10px;
 }
 
-#MilkshakeTitle{
-    text-align: center;
-    font-size: 2.5em;
-    background-color: #D99793;
-    border: 2px solid rgb(170, 139, 0);
-    color: #fff;
-    border-radius: 10px;
-    margin: 10px auto;
-    padding: 12px 16px;
-    width: fit-content;
+#MilkshakeTitle {
+  text-align: center;
+  font-size: 2.5em;
+  background-color: #d99793;
+  border: 2px solid rgb(170, 139, 0);
+  color: #fff;
+  border-radius: 10px;
+  margin: 10px auto;
+  padding: 12px 16px;
+  width: fit-content;
 }
 
-#Quantidademl{
-    text-align: center;
-    font-size: 1.5em;
-    color: #000;
-    margin: 10px auto;
-    padding: 12px 16px;
-    font-weight: bold;
-    text-decoration: none;
-    background-color: #fff600;
-    border-radius: 10px;
-    border: 2px solid #000;
-    width: fit-content;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.size-selector {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
 }
 
-  .container {
-    max-width: 320px;
-    margin: 50px auto;
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    border: 2px solid #000;
-  }
+.size-option {
+  position: relative;
+  cursor: pointer;
+}
 
-  h2 {
-    margin-bottom: 20px;
-  }
+.size-option input {
+  display: none;
+}
 
-  .checkbox-btn {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 15px;
-    margin: 10px 0;
-    border-radius: 20px;
-    border: 2px solid #000;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-    color: white;
-  }
+.size-option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  padding: 12px 20px;
+  border: 2px solid #d9d9d9;
+  border-radius: 12px;
+  background: #fff;
+  color: #444;
+  font-weight: bold;
+  font-size: 16px;
+  transition: 0.25s;
+  user-select: none;
+}
 
-  .checkbox-btn input {
-    display: none;
-  }
+.size-option:hover span {
+  border-color: black;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
 
-  /* Preço */
-  .price {
-    font-size: 14px;
-    font-weight: bold;
-    background: rgba(255,255,255,0.3);
-    padding: 4px 8px;
-    border-radius: 12px;
-  }
+.size-option input:checked + span {
+  background: #FFF600;
+  border-color: black;
+  box-shadow: 0 4px 12px rgba(109, 76, 65, 0.35);
+}
 
-  /* Cores de cada sabor */
-  .morango { background-color: #ff4f8b; }
-  .chocolate { background-color: #8d6e63; }
-  .acai { background-color: #4a148c; }
-  .ovomaltine { background-color: #d2691e; }
-  .pistache { background-color: #8bc34a; }
-  .nutella { background-color: #6d4c41; }
+#Quantidademl {
+  text-align: center;
+  font-size: 1.5em;
+  color: #000;
+  margin: 10px auto;
+  padding: 12px 16px;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #fff600;
+  border-radius: 10px;
+  border: 2px solid #000;
+  width: fit-content;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
 
-  /* Hover */
-  .checkbox-btn:hover {
-    transform: scale(1.05);
-  }
+.container {
+  max-width: 320px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  border: 2px solid #000;
+}
 
-  .label-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
+h2 {
+  margin-bottom: 20px;
+}
 
-  /* Controle de quantidade */
-  .quantity-control {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .quantity-control button {
-    background: rgba(255,255,255,0.3);
-    border: none;
-    padding: 3px 8px;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    color: white;
-  }
-  .quantity-control span {
-    min-width: 20px;
-    text-align: center;
-  }
+.checkbox-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 20px;
+  border: 2px solid #000;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  color: white;
+}
 
-  /* Botão Carrinho */
-  .btn-carrinho {
-    background-color: darkgreen;
-    color: white;
-    border: 2px solid #000;
-    border-radius: 20px;
-    padding: 12px;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 20px;
-    width: 100%;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  .btn-carrinho:hover {
-    transform: scale(1.05);
-  }
+.checkbox-btn input {
+  display: none;
+}
+
+/* Preço */
+.price {
+  font-size: 14px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+/* Cores de cada sabor */
+.morango {
+  background-color: #ff4f8b;
+}
+.chocolate {
+  background-color: #8d6e63;
+}
+.acai {
+  background-color: #4a148c;
+}
+.ovomaltine {
+  background-color: #d2691e;
+}
+.pistache {
+  background-color: #8bc34a;
+}
+.nutella {
+  background-color: #6d4c41;
+}
+
+/* Hover */
+.checkbox-btn:hover {
+  transform: scale(1.05);
+}
+
+.label-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Controle de quantidade */
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.quantity-control button {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  padding: 3px 8px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  color: white;
+}
+.quantity-control span {
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Botão Carrinho */
+.btn-carrinho {
+  background-color: darkgreen;
+  color: white;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 20px;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-carrinho:hover {
+  transform: scale(1.05);
+}

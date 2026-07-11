@@ -1,168 +1,253 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Milkshake</title>
-    <link rel="icon" type="image/x-icon" href="./assets/emoji-de-sorvete.png">
+    <link rel="icon" type="image/x-icon" href="./assets/emoji-de-sorvete.png" />
     <link rel="stylesheet" href="milkshake.css" />
-</head>
-<body>
-  <a href="./menu.html">
+  </head>
+  <body>
+    <a href="./menu.html">
       <img src="./assets/arrow_back.svg" alt="Início" id="home" />
     </a>
+
     <h1 id="MilkshakeTitle">Milkshake</h1>
-    <h2 id="Quantidademl">300ml</h2>
 
-<div class="container">
-  <h2>Escolha seu sabor</h2>
+    <div class="size-selector">
+      <label class="size-option">
+        <input
+          type="radio"
+          name="tamanho"
+          value="300"
+          checked
+          onchange="atualizarPrecos()"
+        />
+        <span>300ml</span>
+      </label>
 
-  <label class="checkbox-btn morango">
-    <input type="checkbox" name="sabor" value="Morango">
-    <div class="label-content">
-      <span>Morango</span>
-      <div class="quantity-control">
-        <button type="button" onclick="changeQuantity(this, -1)">➖</button>
-        <span>0</span>
-        <button type="button" onclick="changeQuantity(this, 1)">➕</button>
-      </div>
-      <span class="price">R$ 14,00</span>
+      <label class="size-option">
+        <input
+          type="radio"
+          name="tamanho"
+          value="500"
+          onchange="atualizarPrecos()"
+        />
+        <span>500ml</span>
+      </label>
     </div>
-  </label>
 
-  <label class="checkbox-btn chocolate">
-    <input type="checkbox" name="sabor" value="Chocolate">
-    <div class="label-content">
-      <span>Chocolate</span>
-      <div class="quantity-control">
-        <button type="button" onclick="changeQuantity(this, -1)">➖</button>
-        <span>0</span>
-        <button type="button" onclick="changeQuantity(this, 1)">➕</button>
-      </div>
-      <span class="price">R$ 14,00</span>
+    <div class="container">
+      <h2>Escolha seu sabor</h2>
+
+      <label class="checkbox-btn morango">
+        <input type="checkbox" name="sabor" value="Morango" />
+        <div class="label-content">
+          <span>Morango</span>
+
+          <div class="quantity-control">
+            <button type="button" onclick="changeQuantity(this, -1)">➖</button>
+            <span>0</span>
+            <button type="button" onclick="changeQuantity(this, 1)">➕</button>
+          </div>
+
+          <span class="price" data-price="14">R$ 14,00</span>
+        </div>
+      </label>
+
+      <label class="checkbox-btn chocolate">
+        <input type="checkbox" name="sabor" value="Chocolate" />
+        <div class="label-content">
+          <span>Chocolate</span>
+
+          <div class="quantity-control">
+            <button type="button" onclick="changeQuantity(this, -1)">➖</button>
+            <span>0</span>
+            <button type="button" onclick="changeQuantity(this, 1)">➕</button>
+          </div>
+
+          <span class="price" data-price="14">R$ 14,00</span>
+        </div>
+      </label>
+
+      <label class="checkbox-btn acai">
+        <input type="checkbox" name="sabor" value="Açaí" />
+        <div class="label-content">
+          <span>Açaí</span>
+
+          <div class="quantity-control">
+            <button type="button" onclick="changeQuantity(this, -1)">➖</button>
+            <span>0</span>
+            <button type="button" onclick="changeQuantity(this, 1)">➕</button>
+          </div>
+
+          <span class="price" data-price="15">R$ 15,00</span>
+        </div>
+      </label>
+
+      <label class="checkbox-btn ovomaltine">
+        <input type="checkbox" name="sabor" value="Ovomaltine" />
+        <div class="label-content">
+          <span>Ovomaltine</span>
+
+          <div class="quantity-control">
+            <button type="button" onclick="changeQuantity(this, -1)">➖</button>
+            <span>0</span>
+            <button type="button" onclick="changeQuantity(this, 1)">➕</button>
+          </div>
+
+          <span class="price" data-price="16">R$ 16,00</span>
+        </div>
+      </label>
+
+      <label class="checkbox-btn pistache">
+        <input type="checkbox" name="sabor" value="Pistache c/Nutella" />
+        <div class="label-content">
+          <span>Pistache c/Nutella</span>
+
+          <div class="quantity-control">
+            <button type="button" onclick="changeQuantity(this, -1)">➖</button>
+            <span>0</span>
+            <button type="button" onclick="changeQuantity(this, 1)">➕</button>
+          </div>
+
+          <span class="price" data-price="18">R$ 18,00</span>
+        </div>
+      </label>
+
+      <label class="checkbox-btn nutella">
+        <input type="checkbox" name="sabor" value="Nutella" />
+        <div class="label-content">
+          <span>Nutella</span>
+
+          <div class="quantity-control">
+            <button type="button" onclick="changeQuantity(this, -1)">➖</button>
+            <span>0</span>
+            <button type="button" onclick="changeQuantity(this, 1)">➕</button>
+          </div>
+
+          <span class="price" data-price="20">R$ 20,00</span>
+        </div>
+      </label>
+
+      <button class="btn-carrinho" onclick="adicionarCarrinho()">
+        🛒 Adicionar ao Carrinho
+      </button>
     </div>
-  </label>
 
-  <label class="checkbox-btn acai">
-    <input type="checkbox" name="sabor" value="Açaí">
-    <div class="label-content">
-      <span>Açaí</span>
-      <div class="quantity-control">
-        <button type="button" onclick="changeQuantity(this, -1)">➖</button>
-        <span>0</span>
-        <button type="button" onclick="changeQuantity(this, 1)">➕</button>
-      </div>
-      <span class="price">R$ 15,00</span>
-    </div>
-  </label>
+    <script>
+      function changeQuantity(button, amount) {
+        let span = button.parentElement.querySelector("span");
+        let value = parseInt(span.textContent) + amount;
 
-  <label class="checkbox-btn ovomaltine">
-    <input type="checkbox" name="sabor" value="Ovomaltine">
-    <div class="label-content">
-      <span>Ovomaltine</span>
-      <div class="quantity-control">
-        <button type="button" onclick="changeQuantity(this, -1)">➖</button>
-        <span>0</span>
-        <button type="button" onclick="changeQuantity(this, 1)">➕</button>
-      </div>
-      <span class="price">R$ 16,00</span>
-    </div>
-  </label>
+        if (value < 0) value = 0;
 
-  <label class="checkbox-btn pistache">
-    <input type="checkbox" name="sabor" value="Pistache c/Nutella">
-    <div class="label-content">
-      <span>Pistache c/Nutella</span>
-      <div class="quantity-control">
-        <button type="button" onclick="changeQuantity(this, -1)">➖</button>
-        <span>0</span>
-        <button type="button" onclick="changeQuantity(this, 1)">➕</button>
-      </div>
-      <span class="price">R$ 18,00</span>
-    </div>
-  </label>
+        span.textContent = value;
+      }
 
-  <label class="checkbox-btn nutella">
-    <input type="checkbox" name="sabor" value="Nutella">
-    <div class="label-content">
-      <span>Nutella</span>
-      <div class="quantity-control">
-        <button type="button" onclick="changeQuantity(this, -1)">➖</button>
-        <span>0</span>
-        <button type="button" onclick="changeQuantity(this, 1)">➕</button>
-      </div>
-      <span class="price">R$ 20,00</span>
-    </div>
-  </label>
+      function atualizarPrecos() {
+        const tamanho = document.querySelector(
+          'input[name="tamanho"]:checked',
+        ).value;
+        const acrescimo = tamanho === "500" ? 4 : 0;
 
-  <button class="btn-carrinho" onclick="adicionarCarrinho()">🛒 Adicionar ao Carrinho</button>
-</div>
+        document.querySelectorAll(".price").forEach((preco) => {
+          const precoBase = parseFloat(preco.dataset.price);
+          const novoPreco = precoBase + acrescimo;
 
-<script>
-  function changeQuantity(button, amount) {
-    let span = button.parentElement.querySelector('span');
-    let value = parseInt(span.textContent) + amount;
-    if (value < 0) value = 0;
-    span.textContent = value;
-  }
+          preco.textContent = "R$ " + novoPreco.toFixed(2).replace(".", ",");
+        });
 
-  window.onload = function () {
-    atualizarBadgeCarrinho();
+        document.getElementById("Quantidademl").textContent = tamanho + "ml";
+      }
 
-    let editIndex = localStorage.getItem("editarIndex");
-    if (editIndex !== null) {
-      let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-      let item = carrinho[editIndex];
+      window.onload = function () {
+        atualizarBadgeCarrinho();
+        atualizarPrecos();
 
-      if (item && item.produto === "Milkshake") {
-        document.querySelectorAll('.checkbox-btn').forEach(sabor => {
-          let nome = sabor.querySelector('.label-content span').textContent;
-          if (item.nome === nome) {
-            sabor.querySelector('.quantity-control span').textContent = item.quantidade;
+        let editIndex = localStorage.getItem("editarIndex");
+
+        if (editIndex !== null) {
+          let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+          let item = carrinho[editIndex];
+
+          if (item && item.produto === "Milkshake") {
+            document.querySelectorAll(".checkbox-btn").forEach((sabor) => {
+              let nome = sabor.querySelector(".label-content span").textContent;
+
+              if (item.nome === nome) {
+                sabor.querySelector(".quantity-control span").textContent =
+                  item.quantidade;
+              }
+            });
+
+            if (item.tamanho) {
+              let tamanho = item.tamanho.replace("ml", "");
+
+              document.querySelector(
+                `input[name="tamanho"][value="${tamanho}"]`,
+              ).checked = true;
+
+              atualizarPrecos();
+            }
+
+            document.querySelector(".btn-carrinho").textContent =
+              "Salvar Alterações";
+          }
+        }
+      };
+
+      function adicionarCarrinho() {
+        let sabores = document.querySelectorAll(".checkbox-btn");
+
+        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+        let editIndex = localStorage.getItem("editarIndex");
+
+        const tamanho = document.querySelector(
+          'input[name="tamanho"]:checked',
+        ).value;
+
+        if (editIndex !== null) {
+          carrinho.splice(editIndex, 1);
+
+          localStorage.removeItem("editarIndex");
+        }
+
+        sabores.forEach((sabor) => {
+          let quantidade = parseInt(
+            sabor.querySelector(".quantity-control span").textContent,
+          );
+
+          let nome = sabor.querySelector(".label-content span").textContent;
+
+          let precoTexto = sabor
+            .querySelector(".price")
+            .textContent.replace("R$", "")
+            .replace(",", ".")
+            .trim();
+
+          let preco = parseFloat(precoTexto);
+
+          if (quantidade > 0) {
+            carrinho.push({
+              produto: "Milkshake",
+              nome: nome,
+              tamanho: tamanho + "ml",
+              quantidade: quantidade,
+              preco: preco,
+              subtotal: preco,
+            });
           }
         });
 
-        document.querySelector(".btn-carrinho").textContent = "Salvar Alterações";
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+        window.location.href = "carrinho.html";
       }
-    }
-  };
+    </script>
 
-  function adicionarCarrinho() {
-    let sabores = document.querySelectorAll('.checkbox-btn');
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-    let editIndex = localStorage.getItem("editarIndex");
-
-    // Se estiver editando, remove o item antigo antes de salvar os novos
-    if (editIndex !== null) {
-      carrinho.splice(editIndex, 1);
-      localStorage.removeItem("editarIndex");
-    }
-
-    sabores.forEach(sabor => {
-      let quantidade = parseInt(sabor.querySelector('.quantity-control span').textContent);
-      let nome = sabor.querySelector('.label-content span').textContent;
-      let precoTexto = sabor.querySelector('.price').textContent.replace("R$", "").replace(",", ".").trim();
-      let preco = parseFloat(precoTexto);
-
-      if (quantidade > 0) {
-        carrinho.push({
-          produto: "Milkshake",
-          nome: nome,
-          quantidade: quantidade,
-          preco: preco,
-          subtotal: preco
-        });
-      }
-    });
-
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
-    window.location.href = "carrinho.html";
-  }
-</script>
-
-
-<script src="utils.js"></script>
-
-</body>
-
+    <script src="utils.js"></script>
+  </body>
 </html>
