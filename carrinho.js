@@ -3,7 +3,7 @@ let paginaAtual = 0;
 const paginas = document.querySelectorAll(".pagina");
 
 function formatarNumerosWhatsApp(texto) {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 868) {
         return texto;
     }
 
