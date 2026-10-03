@@ -158,89 +158,119 @@
           preco.textContent = "R$ " + novoPreco.toFixed(2).replace(".", ",");
         });
 
-        document.getElementById("Quantidademl").textContent = tamanho + "ml";
       }
 
       window.onload = function () {
         atualizarBadgeCarrinho();
-        atualizarPrecos();
 
-        let editIndex = localStorage.getItem("editarIndex");
+        const editIndex = localStorage.getItem("editarIndex");
 
         if (editIndex !== null) {
-          let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
-
-          let item = carrinho[editIndex];
+          const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+          const item = carrinho[Number(editIndex)];
 
           if (item && item.produto === "Milkshake") {
-            document.querySelectorAll(".checkbox-btn").forEach((sabor) => {
-              let nome = sabor.querySelector(".label-content span").textContent;
+            // Seleciona o tamanho salvo no carrinho.
+            const tamanho = String(item.tamanho || "300ml").replace("ml", "");
 
-              if (item.nome === nome) {
-                sabor.querySelector(".quantity-control span").textContent =
-                  item.quantidade;
-              }
-            });
+            const radio = document.querySelector(
+              `input[name="tamanho"][value="${tamanho}"]`
+            );
 
-            if (item.tamanho) {
-              let tamanho = item.tamanho.replace("ml", "");
-
-              document.querySelector(
-                `input[name="tamanho"][value="${tamanho}"]`,
-              ).checked = true;
-
-              atualizarPrecos();
+            if (radio) {
+              radio.checked = true;
             }
+
+            // Restaura a quantidade do sabor.
+            document.querySelectorAll(".checkbox-btn").forEach((sabor) => {
+              const nome = sabor.querySelector(
+                ".label-content > span"
+              ).textContent.trim();
+
+              const quantidade = sabor.querySelector(
+                ".quantity-control span"
+              );
+
+              quantidade.textContent =
+                nome === item.nome ? item.quantidade || 1 : 0;
+            });
 
             document.querySelector(".btn-carrinho").textContent =
               "Salvar Alterações";
           }
         }
+
+        // Atualiza os preços somente depois de restaurar o tamanho.
+        atualizarPrecos();
       };
 
+      
       function adicionarCarrinho() {
-        let sabores = document.querySelectorAll(".checkbox-btn");
+        const sabores = document.querySelectorAll(".checkbox-btn");
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        const editIndex = localStorage.getItem("editarIndex");
 
-        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        const tamanhoSelecionado = document.querySelector(
+          'input[name="tamanho"]:checked'
+        );
 
-        let editIndex = localStorage.getItem("editarIndex");
-
-        const tamanho = document.querySelector(
-          'input[name="tamanho"]:checked',
-        ).value;
-
-        if (editIndex !== null) {
-          carrinho.splice(editIndex, 1);
-
-          localStorage.removeItem("editarIndex");
+        if (!tamanhoSelecionado) {
+          alert("Selecione o tamanho do milkshake.");
+          return;
         }
 
+        const tamanho = tamanhoSelecionado.value + "ml";
+        const novosItens = [];
+
         sabores.forEach((sabor) => {
-          let quantidade = parseInt(
+          const quantidade = parseInt(
             sabor.querySelector(".quantity-control span").textContent,
-          );
+            10
+          ) || 0;
 
-          let nome = sabor.querySelector(".label-content span").textContent;
+          const nome = sabor.querySelector(
+            ".label-content > span"
+          ).textContent.trim();
 
-          let precoTexto = sabor
-            .querySelector(".price")
-            .textContent.replace("R$", "")
+          const precoTexto = sabor.querySelector(".price")
+            .textContent
+            .replace("R$", "")
             .replace(",", ".")
             .trim();
 
-          let preco = parseFloat(precoTexto);
+          const preco = parseFloat(precoTexto);
 
           if (quantidade > 0) {
-            carrinho.push({
+            novosItens.push({
               produto: "Milkshake",
               nome: nome,
-              tamanho: tamanho + "ml",
+              tamanho: tamanho,
               quantidade: quantidade,
               preco: preco,
-              subtotal: preco,
+              subtotal: preco
             });
           }
         });
+
+        if (novosItens.length === 0) {
+          alert("Selecione pelo menos um milkshake.");
+          return;
+        }
+
+        if (editIndex !== null) {
+          const index = Number(editIndex);
+
+          if (carrinho[index]) {
+            // Substitui somente o item que está sendo editado.
+            carrinho.splice(index, 1, ...novosItens);
+          } else {
+            carrinho.push(...novosItens);
+          }
+
+          localStorage.removeItem("editarIndex");
+        } else {
+          carrinho.push(...novosItens);
+        }
 
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
 

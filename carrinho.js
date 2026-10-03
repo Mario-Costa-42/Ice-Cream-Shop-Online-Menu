@@ -2,6 +2,34 @@
 let paginaAtual = 0;
 const paginas = document.querySelectorAll(".pagina");
 
+function formatarNumerosWhatsApp(texto) {
+    if (window.innerWidth > 768) {
+        return texto;
+    }
+
+    const emojis = {
+        "0": "0️⃣",
+        "1": "1️⃣",
+        "2": "2️⃣",
+        "3": "3️⃣",
+        "4": "4️⃣",
+        "5": "5️⃣",
+        "6": "6️⃣",
+        "7": "7️⃣",
+        "8": "8️⃣",
+        "9": "9️⃣"
+    };
+
+    return texto.replace(/\(x(\d+)\)/g, (match, quantidade) => {
+        const quantidadeEmoji = quantidade
+            .split("")
+            .map(digito => emojis[digito])
+            .join("");
+
+        return `(x${quantidadeEmoji})`;
+    });
+}
+
 function mostrarPagina(index) {
   paginas.forEach(p => p.classList.remove("ativa"));
   paginas[index].classList.add("ativa");
@@ -60,7 +88,7 @@ function descricaoItem(item) {
   const totalItem = (item.subtotal || 0) * qtd;
 
   if (item.produto === "Milkshake") {
-    return `${item.produto} - ${item.nome || ""} (x${qtd}) = R$ ${brl(totalItem)}`;
+    return `*${item.produto}* - ${item.nome || ""} ${item.tamanho || "300ml"} (x${qtd}) = R$ ${brl(totalItem)}\n`;
   }
 
   if (item.produto === "Açaí") {
@@ -77,11 +105,11 @@ function descricaoItem(item) {
       ? item.acompanhamentos.join(", ")
       : "Nenhum";
 
-    return `${item.produto} ${item.tamanho} (x${qtd}) - Coberturas: ${cob} - Acompanhamentos: ${acomp} - Extras: ${extrasTxt} = R$ ${brl(totalItem)}`;
+    return `*${item.produto}* ${item.tamanho} (x${qtd}) \n- Coberturas: ${cob} \n- Acompanhamentos: ${acomp} \n- Extras: ${extrasTxt} = R$ ${brl(totalItem)}\n`;
   }
 
   if (item.produto === "Escolhas da Casa") {
-    return `${item.produto}: ${item.sabor} ${item.volume} (x${qtd}) = R$ ${brl(totalItem)}`;
+    return `*${item.produto}* ${item.sabor} ${item.volume} (x${qtd}) = R$ ${brl(totalItem)}\n`;
   }
 
   if (item.produto === "Copos Trufados") {
@@ -101,14 +129,14 @@ function descricaoItem(item) {
       ? item.extras.map(e => `${e.nome} (+R$ ${brl(e.preco)})`).join(", ")
       : "Nenhum";
 
-    return `${item.produto}: ${item.sabor} ${item.tamanho} (x${qtd}) - Coberturas: ${coberturas} - Acompanhamentos: ${acompanhamentos} - Frutas: ${frutas} - Extras: ${extras} = R$ ${brl(totalItem)}`;
+    return `*${item.produto}*: ${item.sabor} ${item.tamanho} (x${qtd}) \n- Coberturas: ${coberturas} \n- Acompanhamentos: ${acompanhamentos} \n- Frutas: ${frutas} \n- Extras: ${extras} = R$ ${brl(totalItem)}\n`;
   }
 
   if (item.produto === "Vitamina") {
-    return `${item.produto} - ${item.nome || ""} (x${qtd}) = R$ ${brl(totalItem)}`;
+    return `*${item.produto}* - ${item.nome || ""} (x${qtd}) = R$ ${brl(totalItem)}\n`;
   }
 
-  return `Item (x${qtd}) = R$ ${brl(totalItem)}`;
+  return `*Item* (x${qtd}) = R$ ${brl(totalItem)}`;
 }
 
 // Renderização
@@ -256,7 +284,9 @@ function enviarWhatsapp() {
     textoPagamento = "\nForma de pagamento: Não informado ⚠️";
   }
 
-  const textoFinal = "📋 Pedido:\n" + resumo + textoPagamento;
+  let textoFinal = "📋 Pedido:\n" + resumo + textoPagamento;
+
+  textoFinal = formatarNumerosWhatsApp(textoFinal);
   const numero = "5532984976952";
   const url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(textoFinal);
 
